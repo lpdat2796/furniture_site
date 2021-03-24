@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "user/themefisher-font/style";
+ @import "user/bootstrap.min";
+ @import "user/animate";
+ @import "user/slick/slick-theme";
+ @import "user/slick/slick";
+ @import "user/style";
+ @import "user/home";

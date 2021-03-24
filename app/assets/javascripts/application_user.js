@@ -11,5 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
-//= require_tree .
+//= require jquery
+//= require jquery_ujs
+//= require user/bootstrap.min
+//= require user/ekko-lightbox.min
+//= require user/instafeed.min
+//= require user/jquery.bootstrap-touchspin.min
+//= require user/jquery.syotimer.min
+//= require user/slick.min
+//= require user/slick-animation.min
+//= require user/script
