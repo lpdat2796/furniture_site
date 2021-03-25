@@ -4,12 +4,14 @@
     <title>FurnitureSite</title>
     <%= csrf_meta_tags %>
     <!-- bootstrap.min css -->
-    <%= stylesheet_link_tag 'application_user', media: 'all' %>
+    <%= stylesheet_link_tag 'application_user', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= render 'user/partial/header' %>
+    <%= render 'user/partial/menu' %>
     <%= yield %>
-
-    <%= javascript_include_tag 'application_user' %>
+    <%= render 'user/partial/footer' %>
+    <%= javascript_include_tag 'application_user', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

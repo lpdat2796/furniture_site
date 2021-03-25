@@ -21,3 +21,13 @@
  @import "user/slick/slick";
  @import "user/style";
  @import "user/home";
+
+ .mt-5 {
+   margin-top: 5px;
+ }
+
+ .category-box .fix-image {
+  width: 400px;
+  max-height: 350px;
+  object-fit: cover;
+ }
