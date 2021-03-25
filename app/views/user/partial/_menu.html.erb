@@ -29,7 +29,7 @@
 												<li class="dropdown-header"><%= child_category.name %></li>
 												<li role="separator" class="divider"></li>
 												<% Category.where(parent_id: "#{ parent_category.id },#{ child_category.id }", is_public: true).each do |category| %>
-													<li><a href="#"><%= category.name %></a></li>
+													<li><a href="<%= user_categories_path(id: category.id) %>"><%= category.name %></a></li>
 												<% end %>
 											</ul>
 										</div>
@@ -42,7 +42,7 @@
 												<li class="dropdown-header"><%= child_category.name %></li>
 												<li role="separator" class="divider"></li>
 												<% Category.where(parent_id: "#{ parent_category.id },#{ child_category.id }", is_public: true).each do |category| %>
-													<li><a href="#"><%= category.name %></a></li>
+													<li><a href="<%= user_categories_path(id: category.id) %>"><%= category.name %></a></li>
 												<% end %>
 											</ul>
 										</div>

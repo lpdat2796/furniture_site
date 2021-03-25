@@ -31,3 +31,9 @@
   max-height: 350px;
   object-fit: cover;
  }
+
+ @media(min-width: 1500px) {
+   .hero-area {
+     height: 1050px;
+   }
+ }
