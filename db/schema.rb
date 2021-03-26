@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210325063152) do
+ActiveRecord::Schema.define(version: 20210326023055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,17 +41,35 @@ ActiveRecord::Schema.define(version: 20210325063152) do
     t.index ["product_id"], name: "index_category_products_on_product_id"
   end
 
-  create_table "master_data", force: :cascade do |t|
+  create_table "color_products", force: :cascade do |t|
+    t.bigint "color_id"
     t.bigint "product_id"
-    t.integer "dimension_x"
-    t.integer "dimension_y"
-    t.integer "dimension_z"
-    t.string "material"
-    t.string "color"
-    t.string "style"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_master_data_on_product_id"
+    t.index ["color_id"], name: "index_color_products_on_color_id"
+    t.index ["product_id"], name: "index_color_products_on_product_id"
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "material_products", force: :cascade do |t|
+    t.bigint "material_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_material_products_on_material_id"
+    t.index ["product_id"], name: "index_material_products_on_product_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "product_images", force: :cascade do |t|
@@ -70,6 +88,9 @@ ActiveRecord::Schema.define(version: 20210325063152) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dimension_x"
+    t.integer "dimension_y"
+    t.integer "dimension_z"
   end
 
   create_table "users", force: :cascade do |t|

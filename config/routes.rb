@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   namespace :user, url: '/user' do
     root to: 'home#index'
     resources :categories
+    resources :products
   end
 end
