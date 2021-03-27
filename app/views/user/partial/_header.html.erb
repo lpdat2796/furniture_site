@@ -87,6 +87,33 @@
 						</ul>
 					</li><!-- / Search -->
 
+					<% if current_user %>
+						<li class="dropdown dropdown-slide">
+							<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+								<span class="text-sm"><i class="far fa-user"></i><%= current_user.full_name %></span>
+							</a>
+							<div class="dropdown-menu cart-dropdown">
+								<div class="media">
+									<%= link_to '#', class: 'dropdown-item' do %>
+										<span class="text-sm"><i class="fas fa-lock mr-2"></i>Change profile</span>
+									<% end %>
+								</div>
+								<div class="dropdown-divider"></div>
+								<div class="media">
+									<%= link_to user_logout_path, method: :delete, class: 'dropdown-item' do %>
+										<span class="text-sm"><i class="fas fa-sign-out-alt mr-2"></i>Logout</span>
+									<% end %>
+								</div>
+							</div>
+						</li>
+					<% else %>
+						<li class='dropdown'>
+							<a class="nav-link" href="<%= user_login_path %>" aria-expanded="false">
+								Login
+							</a>
+						</li>
+					<% end %>
+
 				</ul><!-- / .nav .navbar-nav .navbar-right -->
 			</div>
 		</div>

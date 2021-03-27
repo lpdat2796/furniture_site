@@ -8,10 +8,14 @@
   </head>
 
   <body>
-    <%= render 'user/partial/header' %>
-    <%= render 'user/partial/menu' %>
-    <%= yield %>
-    <%= render 'user/partial/footer' %>
+    <% if (controller_name == 'sessions' || controller_name == 'registrations') %>
+      <%= yield %>
+    <% else %>
+      <%= render 'user/partial/header' %>
+      <%= render 'user/partial/menu' %>
+      <%= yield %>
+      <%= render 'user/partial/footer' %>
+    <% end %>
     <%= javascript_include_tag 'application_user', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
