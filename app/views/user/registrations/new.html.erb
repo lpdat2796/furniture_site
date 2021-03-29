@@ -7,7 +7,7 @@
             <img src="images/logo.png" alt="">
           </a>
           <h2 class="text-center">Create Your Account</h2>
-          <%= form_for @user, url: user_sign_up_path, html: { class: 'text-left clearfix' } do |f| %>
+          <%= form_for @user, url: user_sign_up_path, html: { class: 'text-left clearfix', method: :post } do |f| %>
             <div class="form-group">
               <%= f.text_field :full_name, class: 'form-control', placeholder: 'Full name' %>
             </div>

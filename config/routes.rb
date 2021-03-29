@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
     get "/sign_up", to: "registrations#new"
     post '/sign_up', to: "registrations#create"
+    resources :accounts do
+      get :profile, on: :collection
+      post :update_profile, on: :collection
+    end
   end
 
   namespace :admin, url: '/admin' do
