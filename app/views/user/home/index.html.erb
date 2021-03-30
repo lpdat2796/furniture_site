@@ -54,14 +54,20 @@
 										</span>
 									</li>
 									<li>
-										<a href="#!"><i class="tf-ion-android-cart"></i></a>
+										<% if current_user.present? %>
+											<a href="#!"><i class="tf-ion-android-cart"></i></a>
+										<% else %>
+											<span data-toggle="modal" data-target="#login-modal">
+												<i class="tf-ion-android-cart"></i>
+											</span>
+										<% end %>
 									</li>
 								</ul>ƒ
 							</div>
 						</div>
 						<div class="product-content">
 							<h4><a href="<%= user_product_path(id: product.id, category_id: @trendy_category.id) %>"><%= product.name %></a></h4>
-							<p class="price">$<%= product.price %>vnđ</p>
+							<p class="price">$<%= product.price %></p>
 						</div>
 					</div>
 				</div>
@@ -87,7 +93,13 @@
 													<p class="product-short-description">
 														<%= product.description %>
 													</p>
-													<a href="#" class="btn btn-main">Add To Cart</a>
+													<% if current_user.present? %>
+														<a href="#" class="btn btn-main">Add To Cart</a>
+													<% else %>
+														<span data-toggle="modal" data-target="#login-modal" class='btn btn-main'>
+															Add To Cart
+														</span>
+													<% end %>
 													<a href="<%= user_product_path(id: product.id, category_id: @trendy_category.id) %>" class="btn btn-transparent">View Product Details</a>
 												</div>
 											</div>
