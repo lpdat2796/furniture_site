@@ -33,8 +33,8 @@
 						<li class="dropdown cart-nav dropdown-slide">
 							<a href="<%= user_orders_path %>" class="dropdown-toggle" data-hover="dropdown">
 							<i class="tf-ion-android-cart" id='link-dropdown-cart'></i>Cart
-							<% if @order.order_details.count > 0 %>
-								<span class="badge badge-warning navbar-badge" id='header-item-amount'><%= @order.order_details.pluck(:amount).inject { |sum, element| sum + element } %></span>
+							<% if @order_details.count > 0 %>
+								<span class="badge badge-warning navbar-badge" id='header-item-amount'><%= @order_details.pluck(:amount).inject { |sum, element| sum + element } %></span>
 							<% end %>
 							</a>
 						</li><!-- / Cart -->

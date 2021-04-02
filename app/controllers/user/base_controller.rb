@@ -13,6 +13,6 @@ class User::BaseController < ApplicationController
   end
 
   def set_user
-    @user = User.new if session[:user_id].nil?
+    @user = User.new if session[:user_id].present?.nil?
   end
 end

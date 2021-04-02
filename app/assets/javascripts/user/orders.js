@@ -1,7 +1,4 @@
 function addItem(product_id) {
-  let id, name, price, image;
-  let isExisted = false;
-
   $.ajax({
     url: "/user/orders",
     type: 'POST',
@@ -12,9 +9,9 @@ function addItem(product_id) {
       if (data['can_buy']) {
         if ($('#header-item-amount').length < 1) {
           let itemAmount = "<span class='badge badge-warning navbar-badge' id='header-item-amount'>1</span>";
-          $('#link-dropdown-cart').after(itemAmount)
+          $('#link-dropdown-cart').parent().append(itemAmount)
         } else {
-          let itemAmount = $('#header-item-amount').html()
+          let itemAmount = parseInt($('#header-item-amount').html())
           $('#header-item-amount').html(itemAmount + 1);
         }
       } else {
@@ -23,3 +20,11 @@ function addItem(product_id) {
     }
   });
 }
+
+$(document).ready(function() {
+  $('#default-address').on('click', function() {
+    $('#full_name').val($('#default_full_name').val());
+    $('#address').val($('#default_address').val());
+    $('#phone').val($('#default_phone').val());
+  });
+});

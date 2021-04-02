@@ -1,7 +1,10 @@
 class User::HomeController < User::BaseController
   def index
-    @order = current_user.orders.find_by(status: 'draft')
-    @order_details = @order&.order_details || []
+    if session[:user_id].present?
+      @order = current_user.orders.find_by(status: 'draft')
+      @order_details = @order&.order_details || []
+    end
+
     @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
     @new_category = Category.where(name: 'New furniture', parent_id: nil).first
     @new_products = @new_category.products.where(is_public: true)

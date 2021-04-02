@@ -111,7 +111,7 @@ input[type="email"], input[type="password"], input[type="text"], input[type="tel
   box-shadow: none;
   height: 45px;
   outline: none;
-  font-weight: 200;
+  font-weight: 500;
   font-size: 12px;
 }
 
@@ -362,7 +362,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .page-header h1 {
-  font-weight: 200;
+  font-weight: 500;
   margin: 0 0 6px 0;
 }
 
@@ -373,7 +373,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .page-header .breadcrumb li {
-  font-weight: 200;
+  font-weight: 500;
   font-size: 12px;
 }
 
@@ -780,7 +780,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 .cart-dropdown .cart-price {
   color: #7f7f7f;
   font-size: 12px;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .cart-dropdown .remove {
@@ -1311,12 +1311,12 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .single-product .breadcrumb li {
   color: #000;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .single-product .breadcrumb li a {
   color: #000;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .single-product .product-pagination li {
@@ -1332,7 +1332,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .single-product .product-pagination li a {
   color: #000;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .single-product .product-pagination li a i {
@@ -1354,7 +1354,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .single-product-slider .carousel .carousel-inner .carousel-caption p {
   width: 50%;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .single-product-slider .carousel .carousel-inner .carousel-caption .btn-main, .single-product-slider .carousel .carousel-inner .carousel-caption .btn-solid-border, .single-product-slider .carousel .carousel-inner .carousel-caption .btn-transparent, .single-product-slider .carousel .carousel-inner .carousel-caption .btn-small {
@@ -1766,7 +1766,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   margin-right: 20px;
   font-size: 12px;
   letter-spacing: 1px;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .post .post-meta ul li a {
@@ -1881,7 +1881,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   display: inline-block;
   color: #7e7e7e;
   font-size: 12px;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .post-comments .comment-button {
@@ -2071,7 +2071,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .widget.widget-subscription .form-group input {
   font-size: 12px;
-  font-weight: 200;
+  font-weight: 500;
   height: 45px;
 }
 
@@ -2100,7 +2100,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 
 .widget.widget-category ul li a {
   color: #837f7e;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .widget.widget-category ul li a:before {
@@ -2698,4 +2698,15 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   color: #555;
 }
 
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;  
+}
 /*# sourceMappingURL=style.css.map */

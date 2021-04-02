@@ -15,7 +15,9 @@ Rails.application.routes.draw do
       post :update_profile, on: :collection
     end
 
-    resources :orders
+    resources :orders do
+      post 'checkout', on: :collection
+    end
   end
 
   namespace :admin, url: '/admin' do

@@ -50,9 +50,9 @@
 		</button>
 		<div class="modal-dialog" role="document">
 			<section class="signin-page account">
-				<div class="container">
+				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-1">
+						<div class="col-md-11" style='margin-left: 25px;'>
 							<div class="block text-center">
 								<h2 class="text-center">Welcome</h2>
 								<%= form_for @user, url: user_login_path, html: { class: 'text-left clearfix', method: :post } do |f| %>

@@ -20,7 +20,7 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="block">
             <div class="product-list">
-              <form method="post">
+              <% if @order.present? %>
                 <table class="table">
                   <thead>
                     <tr>
@@ -50,8 +50,57 @@
                     <% end %>
                   </tbody>
                 </table>
-                <a href="checkout.html" class="btn btn-main pull-right">Checkout</a>
-              </form>
+                <hr>
+                <div class="summary-total mb-40" style='text-align: right; font-weight: bold'>
+                  <span>Total</span>
+                  <span class='checkout-total'>$<%= @order.total_amount %></span>
+                </div>
+
+                <a class="btn btn-main pull-right" data-toggle="modal" data-target="#checkout-modal">Checkout</a>
+                <!-- Modal checkout -->
+                <div class="modal product-modal fade" id="checkout-modal">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="tf-ion-close"></i>
+                  </button>
+                  <div class="modal-dialog" role="document">
+                    <section class="modal-content">
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-md-11" style='margin-left: 25px;'>
+                            <div class="block text-center">
+                              <h2 class="text-center mb-40">Preorder at Decosy - Add your contact information</h2>
+                              <%= form_tag checkout_user_orders_path, class: 'text-left clearfix row', method: :post do %>
+                                <%= hidden_field_tag :order_id, @order.id %>
+                                <div class="form-group">
+                                  <label class='col-md-4'>Name</label>
+                                  <%= text_field_tag :full_name, nil, class: 'form-control col-md-8 mb-40', placeholder: 'Your name...' %>
+                                  <%= hidden_field_tag :default_full_name, current_user.full_name %>
+                                </div>
+                                <div class="form-group">
+                                  <label class='col-md-4'>Address</label>
+                                  <%= text_field_tag :address, nil, class: 'form-control col-md-8 mb-40', placeholder: 'Your address...' %>
+                                  <%= hidden_field_tag :default_address, current_user.address %>
+                                </div>
+                                <div class="form-group">
+                                  <label class='col-md-4'>Phone</label>
+                                  <%= text_field_tag :phone, nil, class: 'form-control col-md-8 mb-40', placeholder: 'Your phone...' %>
+                                  <%= hidden_field_tag :default_phone, current_user.phone %>
+                                </div>
+                                <div class="text-center">
+                                  <button type="button" class="btn btn-main btn-primary text-center" id='default-address' style='margin-right: 100px;'>Default address</button>
+                                  <button type="submit" class="btn btn-main text-center">Submit</button>
+                                </div>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              <% else %>
+                <h3 style='text-align: center;'>There is no item in your cart</h3>
+              <% end %>
             </div>
           </div>
         </div>

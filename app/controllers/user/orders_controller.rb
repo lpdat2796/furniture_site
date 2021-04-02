@@ -2,6 +2,7 @@ class User::OrdersController < User::BaseController
   def index
     unless current_user.present?
       redirect_to user_root_path
+      return
     end
 
     @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
@@ -21,6 +22,8 @@ class User::OrdersController < User::BaseController
     if product.amount < 1
       render json: { can_buy: false }
       return
+    else
+      product.update(amount: product.amount - 1)
     end
 
     old_order = order.order_details.find_by(product_id: product.id)
@@ -48,5 +51,12 @@ class User::OrdersController < User::BaseController
     else
       order_detail.update(amount: amount - 1)
     end
+  end
+
+  def checkout
+    order = Order.find(params[:order_id])
+    order.update(status: 'process')
+    OrderDelivery.create(address: params[:address], phone: params[:phone], full_name: params[:full_name], order_id: params[:order_id])
+    redirect_to user_root_path
   end
 end
