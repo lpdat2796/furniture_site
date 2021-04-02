@@ -1,7 +1,11 @@
 class User < ApplicationRecord
   # Encode password
   has_secure_password
+
+  # Associations
+  has_many :orders
   
+  # Validations
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8, maximum: 38 }, if: -> { id.nil? }
   validates :full_name, presence: true

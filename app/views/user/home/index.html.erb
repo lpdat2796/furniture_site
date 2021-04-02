@@ -44,7 +44,6 @@
 				<div class="col-md-4">
 					<div class="product-item">
 						<div class="product-thumb">
-							<span class="bage">Sale</span>
 							<img class="img-responsive" src="<%= product.product_images.first.file_data.url %>" alt="product-img" />
 							<div class="preview-meta">
 								<ul>
@@ -55,7 +54,7 @@
 									</li>
 									<li>
 										<% if current_user.present? %>
-											<a href="#!"><i class="tf-ion-android-cart"></i></a>
+											<a href="javascript:addItem(<%= product.id %>);"><i class="tf-ion-android-cart"></i></a>
 										<% else %>
 											<span data-toggle="modal" data-target="#login-modal">
 												<i class="tf-ion-android-cart"></i>
@@ -94,7 +93,7 @@
 														<%= product.description %>
 													</p>
 													<% if current_user.present? %>
-														<a href="#" class="btn btn-main">Add To Cart</a>
+														<a href="javascript:addItem(<%= product.id %>);" class="btn btn-main">Add To Cart</a>
 													<% else %>
 														<span data-toggle="modal" data-target="#login-modal" class='btn btn-main'>
 															Add To Cart

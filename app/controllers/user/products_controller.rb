@@ -1,5 +1,7 @@
 class User::ProductsController < User::BaseController
   def show
+    @order = current_user.orders.find_by(status: 'draft')
+    @order_details = @order&.order_details || []
     @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
     if params[:category_id].to_i > 0
       @category = Category.find(params[:category_id])

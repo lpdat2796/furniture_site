@@ -29,52 +29,14 @@
 			<div class="col-md-4 col-xs-12 col-sm-4">
 				<!-- Cart -->
 				<ul class="top-menu text-right list-inline">
-					<% if current_user.present? %>
+					<% if current_user.present?  %>
 						<li class="dropdown cart-nav dropdown-slide">
-							<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-									class="tf-ion-android-cart"></i>Cart</a>
-							<div class="dropdown-menu cart-dropdown">
-								<!-- Cart Item -->
-								<div class="media">
-									<a class="pull-left" href="#!">
-										<img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image" />
-									</a>
-									<div class="media-body">
-										<h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-										<div class="cart-price">
-											<span>1 x</span>
-											<span>1250.00</span>
-										</div>
-										<h5><strong>$1200</strong></h5>
-									</div>
-									<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-								</div><!-- / Cart Item -->
-								<!-- Cart Item -->
-								<div class="media">
-									<a class="pull-left" href="#!">
-										<img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image" />
-									</a>
-									<div class="media-body">
-										<h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-										<div class="cart-price">
-											<span>1 x</span>
-											<span>1250.00</span>
-										</div>
-										<h5><strong>$1200</strong></h5>
-									</div>
-									<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-								</div><!-- / Cart Item -->
-
-								<div class="cart-summary">
-									<span>Total</span>
-									<span class="total-price">$1799.00</span>
-								</div>
-								<ul class="text-center cart-buttons">
-									<li><a href="#" class="btn btn-small">View Cart</a></li>
-									<li><a href="#" class="btn btn-small btn-solid-border">Checkout</a></li>
-								</ul>
-							</div>
-
+							<a href="<%= user_orders_path %>" class="dropdown-toggle" data-hover="dropdown">
+							<i class="tf-ion-android-cart" id='link-dropdown-cart'></i>Cart
+							<% if @order.order_details.count > 0 %>
+								<span class="badge badge-warning navbar-badge" id='header-item-amount'><%= @order.order_details.pluck(:amount).inject { |sum, element| sum + element } %></span>
+							<% end %>
+							</a>
 						</li><!-- / Cart -->
 					<% end %>
 

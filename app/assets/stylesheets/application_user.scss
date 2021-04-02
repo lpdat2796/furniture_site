@@ -19,6 +19,7 @@
  @import "user/slick/slick";
  @import "user/style";
  @import "user/home";
+ @import 'admin/fontawesome-free/css/all';
 
  .mt-5 {
    margin-top: 5px;
@@ -38,4 +39,17 @@
 
 .breadcrumb > .active.active {
   color: #777;
+}
+
+.navbar-badge {
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 2px 5px;
+  position: absolute;
+  margin-left: 1px;
+}
+
+.badge-warning {
+  color: #1f2d3d;
+  background-color: #ffc107;
 }

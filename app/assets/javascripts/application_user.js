@@ -21,3 +21,4 @@
 //= require user/slick.min
 //= require user/slick-animation.min
 //= require user/script
+//= require user/orders

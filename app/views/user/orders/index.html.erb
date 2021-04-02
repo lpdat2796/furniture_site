@@ -1,0 +1,61 @@
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Cart</h1>
+					<ol class="breadcrumb">
+						<li><a href="<%= user_root_path %>">Home</a></li>
+						<li class="active">Cart</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="page-wrapper">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="">Item Name</th>
+                      <th class="">Total</th>
+                      <th class="">Item Price</th>
+                      <th class="">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @order_details.each do |order_detail| %>
+                      <tr id='order-detail-<%= order_detail.id %>'>
+                        <td class="">
+                          <div class="product-info">
+                            <img width="80" src="<%= order_detail.product.product_images.order(sort_order: :desc).first.file_data.url %>" alt="" />
+                            <a href="#!"><%= order_detail.product.name %></a>
+                          </div>
+                        </td>
+                        <td class='order-detail-amount-<%= order_detail.id %>'><%= order_detail.amount %></td>
+                        <td>$<%= order_detail.product.price %></td>
+                        <td>
+                          <%= link_to user_orders_path(order_detail.id), method: :delete, class: 'product-remove', data: { confirm: 'Are you sure you want to delete it?' } do %>
+                            <i class="fas fa-trash" style='font-size: 2.5rem;'></i>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <a href="checkout.html" class="btn btn-main pull-right">Checkout</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
