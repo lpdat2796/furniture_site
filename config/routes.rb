@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     resources :orders do
       post 'checkout', on: :collection
     end
+
+    resources :carts do
+      get 'complete', on: :collection
+    end
   end
 
   namespace :admin, url: '/admin' do

@@ -31,7 +31,7 @@
 				<ul class="top-menu text-right list-inline">
 					<% if current_user.present?  %>
 						<li class="dropdown cart-nav dropdown-slide">
-							<a href="<%= user_orders_path %>" class="dropdown-toggle" data-hover="dropdown">
+							<a href="<%= user_carts_path %>" class="dropdown-toggle" data-hover="dropdown">
 							<i class="tf-ion-android-cart" id='link-dropdown-cart'></i>Cart
 							<% if @order_details.count > 0 %>
 								<span class="badge badge-warning navbar-badge" id='header-item-amount'><%= @order_details.pluck(:amount).inject { |sum, element| sum + element } %></span>
@@ -59,13 +59,19 @@
 							<div class="dropdown-menu cart-dropdown">
 								<div class="media">
 									<%= link_to profile_user_accounts_path, class: 'dropdown-item' do %>
-										<span class="text-sm"><i class="fas fa-lock mr-2"></i>Change profile</span>
+										<span class="text-sm"><i class="fas fa-lock mr-2"></i> Change profile</span>
+									<% end %>
+								</div>
+								<div class="dropdown-divider"></div>
+								<div class="media">
+									<%= link_to user_orders_path, class: 'dropdown-item' do %>
+										<span class="text-sm"><i class="fas fa-list-alt mr-2"></i> My orders</span>
 									<% end %>
 								</div>
 								<div class="dropdown-divider"></div>
 								<div class="media">
 									<%= link_to user_logout_path, method: :delete, class: 'dropdown-item' do %>
-										<span class="text-sm"><i class="fas fa-sign-out-alt mr-2"></i>Logout</span>
+										<span class="text-sm"><i class="fas fa-sign-out-alt mr-2"></i> Logout</span>
 									<% end %>
 								</div>
 							</div>

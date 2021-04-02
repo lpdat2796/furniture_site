@@ -8,10 +8,11 @@ class User::OrdersController < User::BaseController
     @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
     @order = current_user.orders.find_by(status: 'draft')
     @order_details = @order&.order_details || []
+    @list_orders = current_user.orders.where.not(status: 'draft')
   end
 
   def create
-    order = current_user.orders.find_by(status: 'draft')
+    order = current_user.orders.find_by(status: 'draft', uuid: rand.to_s[2..7])
 
     if order.nil?
       order = current_user.orders.create(status: 'draft')
@@ -41,6 +42,18 @@ class User::OrdersController < User::BaseController
     render json: { can_buy: true }
   end
 
+  def show
+    unless current_user.present?
+      redirect_to user_root_path
+      return
+    end
+
+    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
+    @order = current_user.orders.find_by(status: 'draft')
+    @order_details = @order&.order_details || []
+    @order = Order.where(id: params[:id]).where.not(status: 'draft').first
+  end
+
   def destroy
     order_detail = OrderDetail.find(params[:id])
     amount = order_detail.amount
@@ -55,8 +68,8 @@ class User::OrdersController < User::BaseController
 
   def checkout
     order = Order.find(params[:order_id])
-    order.update(status: 'process')
+    order.update(status: 'processing')
     OrderDelivery.create(address: params[:address], phone: params[:phone], full_name: params[:full_name], order_id: params[:order_id])
-    redirect_to user_root_path
+    redirect_to complete_user_carts_path
   end
 end

@@ -3,4 +3,17 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_details
   has_one :order_delivery
+
+  def get_color_label
+    case status
+    when 'processing'
+      'label-primary'
+    when 'delivery'
+      'label-warning'
+    when 'complete'
+      'label-success'
+    when 'canceled'
+      'label-danger'
+    end
+  end
 end

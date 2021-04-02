@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210402043138) do
+ActiveRecord::Schema.define(version: 20210402144920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20210402043138) do
     t.boolean "is_public", default: false
     t.string "url"
     t.integer "sort_order", default: 0
+    t.datetime "created_at", default: "2021-04-02 14:52:07", null: false
+    t.datetime "updated_at", default: "2021-04-02 14:52:07", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -76,6 +78,8 @@ ActiveRecord::Schema.define(version: 20210402043138) do
     t.string "address"
     t.string "full_name"
     t.string "phone"
+    t.datetime "created_at", default: "2021-04-02 14:52:07", null: false
+    t.datetime "updated_at", default: "2021-04-02 14:52:07", null: false
     t.index ["order_id"], name: "index_order_deliveries_on_order_id"
   end
 
@@ -83,6 +87,8 @@ ActiveRecord::Schema.define(version: 20210402043138) do
     t.bigint "order_id"
     t.bigint "product_id"
     t.integer "amount", default: 1
+    t.datetime "created_at", default: "2021-04-02 14:52:07", null: false
+    t.datetime "updated_at", default: "2021-04-02 14:52:07", null: false
     t.index ["order_id"], name: "index_order_details_on_order_id"
     t.index ["product_id"], name: "index_order_details_on_product_id"
   end
@@ -91,6 +97,9 @@ ActiveRecord::Schema.define(version: 20210402043138) do
     t.bigint "user_id"
     t.string "status"
     t.integer "total_amount"
+    t.string "uuid"
+    t.datetime "created_at", default: "2021-04-02 14:52:07", null: false
+    t.datetime "updated_at", default: "2021-04-02 14:52:07", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
