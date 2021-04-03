@@ -10,13 +10,16 @@
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
-    <% if (controller_name == 'sessions' || controller_name == 'registrations') %>
+    <% if controller_name == 'sessions' %>
+      <%= stylesheet_link_tag 'application_admin_session', media: 'all', 'data-turbolinks-track': 'reload' %>
       <%= yield %>
     <% else %>
       <div class="wrapper">
         <%= render 'admin/partial/header' %>
         <%= render 'admin/partial/sidebar' %>
-        <%= yield %>
+        <div class='content-wrapper'>
+          <%= yield %>
+        </div>
         <%= render 'admin/partial/footer' %>
       </div>
     <% end %>

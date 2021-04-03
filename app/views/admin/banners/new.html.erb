@@ -1,0 +1,52 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>New banner</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <!-- /.card-header -->
+      <%= form_for @banner, url: admin_banners_path, method: :post do |f| %>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Name</label>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Image</label>
+            <%= f.file_field :image, class: 'form-control', style: 'height: 44px;' %>
+          </div>
+          <div class="form-group">
+            <label>Url</label>
+            <%= f.text_field :url, type: 'url', class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Sort order</label>
+            <%= f.number_field :sort_order, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Public</label>
+            <div>
+              <%= f.radio_button("is_public", "true") %>
+              <%= label :is_public, 'True' %>
+            </div>
+            <div>
+              <%= f.radio_button("is_public", "false", checked: true) %>
+              <%= label :is_public, 'False' %>
+            </div>
+          </div>
+        <!-- /.card-body -->
+          <div style='text-align: right;'>
+            <%= f.submit 'Submit', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</section>

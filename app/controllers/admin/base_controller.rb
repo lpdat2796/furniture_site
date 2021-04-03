@@ -2,17 +2,19 @@ class Admin::BaseController < ApplicationController
   layout 'application_admin'
   helper_method :current_admin
   helper_method :logged_in?
-  before_action :set_admin
+  before_action :authentication!
 
-  def current_user
+  def current_admin
     User.find_by(id: session[:admin_id])  
   end
 
   def logged_in?
-    !current_user.nil?  
+    !current_admin.nil?  
   end
 
-  def set_admin
-    @user = User.new if session[:admin_id].present?.nil?
+  def authentication!
+    if controller_name != 'sessions' && !logged_in?
+      redirect_to admin_login_path
+    end
   end
 end
