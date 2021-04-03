@@ -1,10 +1,10 @@
 
 $(document).ready(function() {
-  if (location.pathname.split('/')[location.pathname.split('/').length - 1] != 'admin') {
+  if (location.pathname.split('/')[2] != undefined) {
     $(".nav>li.nav-item").each(function() {
       var navItem = $(this);
 
-      if (navItem.find('a').attr('id') == location.pathname.split('/')[location.pathname.split('/').length - 1]) {
+      if (navItem.find('a').attr('href').includes(location.pathname.split('/')[2])) {
         navItem.find('a').addClass("active");
         return;
       }
