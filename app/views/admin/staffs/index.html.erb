@@ -1,0 +1,55 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Staffs list</h1>
+      </div>
+      <div class="col-sm-6">
+        <%= link_to new_admin_staff_path, class: 'btn btn-primary float-sm-right' do %>
+          <i class="fas fa-plus-circle"></i> New staff
+        <% end %>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <!-- /.card-header -->
+      <div class="card-body p-0">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Email</th>
+              <th>Full name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.email %></td>
+                <td><%= user.full_name %></td>
+                <td class="text-right">
+                  <%= link_to edit_admin_staff_path(user.id), class: 'btn btn-info btn-sm' do %>
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Edit
+                  <% end %>
+                  <%= link_to admin_staff_path(user.id), class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure you want to delete it?' } do %>
+                    <i class="fas fa-trash">
+                    </i>
+                    Delete
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</section>

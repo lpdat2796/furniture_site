@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8, maximum: 38 }, if: -> { id.nil? }
   validates :full_name, presence: true
-  validates :address, presence: true
-  validates :phone, presence: true
-  validates :age, presence: true
+  validates :address, presence: true, if: -> { role == 'user' }
+  validates :phone, presence: true, if: -> { role == 'user' }
+  validates :age, presence: true, if: -> { role == 'user' }
 end
