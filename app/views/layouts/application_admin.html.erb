@@ -10,11 +10,16 @@
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-      <%= render 'admin/partial/header' %>
-      <%= render 'admin/partial/sidebar' %>
+    <% if (controller_name == 'sessions' || controller_name == 'registrations') %>
       <%= yield %>
-      <%= render 'admin/partial/footer' %>
+    <% else %>
+      <div class="wrapper">
+        <%= render 'admin/partial/header' %>
+        <%= render 'admin/partial/sidebar' %>
+        <%= yield %>
+        <%= render 'admin/partial/footer' %>
+      </div>
+    <% end %>
     </div>
   </body>
 </html>

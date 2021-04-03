@@ -23,7 +23,7 @@
                     <td><%= order.created_at.to_date %></td>
                     <td><%= order.order_details.pluck(:amount).inject { |sum, item| sum + item } %></td>
                     <td>$<%= order.total_amount %></td>
-                    <td><span class="label <%= order.get_color_label %>"><%= order.status %></span></td>
+                    <td><span class="label <%= order.get_color_label %>"><%= order.status.titlecase %></span></td>
                     <td><a href="<%= user_order_path(order.id) %>" class="btn btn-default">View</a></td>
                   </tr>
                 <% end %>

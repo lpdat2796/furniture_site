@@ -17,3 +17,4 @@ Rails.application.config.assets.precompile += %w(application_admin.js applicatio
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'stylesheets')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'javascripts')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'images')

@@ -4,6 +4,9 @@ class User < ApplicationRecord
 
   # Associations
   has_many :orders
+
+  # Enums
+  enum role: { user: 0, admin: 1 }
   
   # Validations
   validates :email, presence: true, uniqueness: true

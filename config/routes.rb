@@ -26,5 +26,9 @@ Rails.application.routes.draw do
 
   namespace :admin, url: '/admin' do
     root to: 'home#index'
+    get "/login", to: "sessions#new"
+    post '/login', to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+    resources :banners
   end
 end

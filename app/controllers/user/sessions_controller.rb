@@ -5,18 +5,18 @@ class User::SessionsController < User::BaseController
   end
 
   def create
-    @user = User.find_by(email: params[:user][:email])
-    if @user && @user.authenticate(params[:user][:password])
+    @user = User.find_by(email: params[:user][:email]) 
+    if @user && @user.authenticate(params[:user][:password]) && @user.user?
       session[:user_id] = @user.id
       redirect_to user_root_path
     else
-      flash.now[:danger] = 'Login failed.'
-      render :new
+      flash[:danger] = 'Login failed.'
+      redirect_to user_login_path
     end
   end
 
   def destroy
-    reset_session
+    session[:user_id] = nil
     redirect_to user_root_path
   end
 end

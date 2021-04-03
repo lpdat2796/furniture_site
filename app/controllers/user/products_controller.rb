@@ -3,6 +3,8 @@ class User::ProductsController < User::BaseController
     if session[:user_id].present?
       @order = current_user.orders.find_by(status: 'draft')
       @order_details = @order&.order_details || []
+    else
+      @user = User.new
     end
 
     @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
