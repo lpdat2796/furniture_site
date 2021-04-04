@@ -34,6 +34,9 @@ Rails.application.routes.draw do
     resources :staffs
     resources :categories
     resources :products
-    resources :orders
+    resources :orders do
+      get 'rejected_orders', on: :collection
+      get 'rejected_orders/:id', to: 'orders#rejected_order_detail', as: 'rejected_order_detail', on: :collection
+    end
   end
 end

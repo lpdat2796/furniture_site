@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210404112248) do
+ActiveRecord::Schema.define(version: 20210404131711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 20210404112248) do
     t.string "reject_comment"
     t.date "expected_shipment_date"
     t.date "shipment_date"
+    t.date "rejected_at"
+    t.integer "whodunit"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

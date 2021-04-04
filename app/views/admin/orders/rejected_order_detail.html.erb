@@ -1,0 +1,76 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Detail rejected order</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="form-group">
+          <label>Order code</label>
+          <%= text_field_tag :order_code, @order.uuid, class: 'form-control', readonly: true %>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <%= text_field_tag :email, @order.user.email, class: 'form-control', readonly: true %>
+        </div>
+        <div class="form-group">
+          <label>Full name</label>
+          <%= text_field_tag :email, @order.order_delivery.full_name, class: 'form-control', readonly: true %>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <%= text_field_tag :email, @order.order_delivery.address, class: 'form-control', readonly: true %>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <%= text_field_tag :email, @order.order_delivery.phone, class: 'form-control', readonly: true %>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="mb-3">
+              <label class="form-label">Producs</label>
+              <div class="card m-0" style="max-height: calc(24rem + 10px)">
+                <div class="card-body card-body-scrollable card-body-scrollable-shadow p-3">
+                  <div class="divide-y-4">
+                    <% @order.order_details.each do |detail|%>
+                      <div class="row mb-10 mt-10">
+                        <%= image_tag detail.product.card_image.thumb.url, class: 'col-auto', style: 'height:50px; width:50px; padding: unset; margin-right: 10px;' %>
+                        <div class="col p-0">
+                          <div class="text-truncate">
+                            <strong><%= detail.product.name %></strong>
+                          </div>
+                          <div class="text-muted">
+                            $ <%= detail.product.price %>
+                          </div>
+                        </div>
+                        <div class="col-auto align-self-center">
+                          <div class="badge bg-dark number-product">x <%= detail.product.amount %></div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Total amount</label>
+          <%= text_field_tag :total_amount, "$ #{ @order.total_amount }", class: 'form-control', readonly: true %>
+        </div>
+        <div class="form-group">
+          <label>Reject reason</label>
+          <%= text_area_tag :reject_comment, @order.reject_comment, class: 'form-control', readonly: true %>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</section>
