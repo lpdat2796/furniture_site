@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Shipments list</h1>
+        <h1>Completed orders list</h1>
       </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -20,8 +20,8 @@
               <th>Full name</th>
               <th>Address</th>
               <th>Phone</th>
-              <th>Expected delivery date</th>
               <th>Created date</th>
+              <th>Shipment date</th>
               <th></th>
             </tr>
           </thead>
@@ -33,10 +33,10 @@
                 <td><%= order.order_delivery.full_name %></td>
                 <td><%= order.order_delivery.address %></td>
                 <td><%= order.order_delivery.phone %></td>
-                <td><%= order.expected_shipment_date.to_date %></td>
                 <td><%= order.created_at.to_date %></td>
+                <td><%= order.shipment_date.to_date %></td>
                 <td class="text-right">
-                  <%= link_to shipment_detail_admin_orders_path(order.id), class: 'btn btn-info btn-sm' do %>
+                  <%= link_to completed_order_detail_admin_orders_path(order.id), class: 'btn btn-info btn-sm' do %>
                     <i class="fas fa-pencil-alt">
                     </i>
                     Detail

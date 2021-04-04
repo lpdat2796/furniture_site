@@ -43,12 +43,20 @@ class Admin::OrdersController < Admin::BaseController
   def shipment_detail_update
     @order = Order.find(params[:id])
 
-    if @order.update(expected_shipment_date: params[:order][:shipment_date], status: 'completed')
+    if @order.update(shipment_date: params[:order][:shipment_date], status: 'completed')
       flash[:success] = 'Update shipment successfully'
       redirect_to shipments_admin_orders_path
     else
       flash.now[:danger] = 'Update order failed'
       render :shipment_detail
     end
+  end
+
+  def completed_orders
+    @orders = Order.where(status: 'completed')
+  end
+
+  def completed_order_detail
+    @order = Order.where(id: params[:id], status: 'completed').first
   end
 end

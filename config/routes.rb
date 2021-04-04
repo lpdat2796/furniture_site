@@ -39,7 +39,9 @@ Rails.application.routes.draw do
       get 'rejected_orders/:id', to: 'orders#rejected_order_detail', as: 'rejected_order_detail', on: :collection
       get 'shipments', on: :collection
       get 'shipments/:id', to: 'orders#shipment_detail', as: 'shipment_detail', on: :collection
-      post 'shipment_detail_update', on: :collection
+      post 'shipments', to: 'orders#shipment_detail_update', as: 'shipment_detail_update', on: :collection
+      get 'completed_orders', on: :collection
+      get 'completed_orders/:id', to: 'orders#completed_order_detail', as: 'completed_order_detail', on: :collection
     end
   end
 end
