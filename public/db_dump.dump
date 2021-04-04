@@ -1,0 +1,849 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.2
+-- Dumped by pg_dump version 13.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO pat;
+
+--
+-- Name: banners; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.banners (
+    id bigint NOT NULL,
+    name character varying,
+    image character varying,
+    is_public boolean DEFAULT false,
+    url character varying,
+    sort_order integer DEFAULT 0,
+    created_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.086305'::timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.086305'::timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.banners OWNER TO pat;
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.banners_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.banners_id_seq OWNER TO pat;
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.banners_id_seq OWNED BY public.banners.id;
+
+
+--
+-- Name: categories; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.categories (
+    id bigint NOT NULL,
+    name character varying,
+    parent_id character varying DEFAULT '0'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    is_public boolean DEFAULT false
+);
+
+
+ALTER TABLE public.categories OWNER TO pat;
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.categories_id_seq OWNER TO pat;
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
+
+
+--
+-- Name: category_products; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.category_products (
+    id bigint NOT NULL,
+    category_id bigint,
+    product_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.category_products OWNER TO pat;
+
+--
+-- Name: category_products_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.category_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.category_products_id_seq OWNER TO pat;
+
+--
+-- Name: category_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.category_products_id_seq OWNED BY public.category_products.id;
+
+
+--
+-- Name: order_deliveries; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.order_deliveries (
+    id bigint NOT NULL,
+    order_id bigint,
+    address character varying,
+    full_name character varying,
+    phone character varying,
+    created_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.088211'::timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.088211'::timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.order_deliveries OWNER TO pat;
+
+--
+-- Name: order_deliveries_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.order_deliveries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.order_deliveries_id_seq OWNER TO pat;
+
+--
+-- Name: order_deliveries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.order_deliveries_id_seq OWNED BY public.order_deliveries.id;
+
+
+--
+-- Name: order_details; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.order_details (
+    id bigint NOT NULL,
+    order_id bigint,
+    product_id bigint,
+    amount integer DEFAULT 1,
+    created_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.089662'::timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.089662'::timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.order_details OWNER TO pat;
+
+--
+-- Name: order_details_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.order_details_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.order_details_id_seq OWNER TO pat;
+
+--
+-- Name: order_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.order_details_id_seq OWNED BY public.order_details.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    user_id bigint,
+    status character varying,
+    total_amount integer,
+    uuid character varying,
+    created_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.092675'::timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone DEFAULT '2021-04-04 05:27:21.092675'::timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.orders OWNER TO pat;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO pat;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- Name: product_images; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.product_images (
+    id bigint NOT NULL,
+    product_id bigint,
+    file_data character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    sort_order integer DEFAULT 0
+);
+
+
+ALTER TABLE public.product_images OWNER TO pat;
+
+--
+-- Name: product_images_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.product_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.product_images_id_seq OWNER TO pat;
+
+--
+-- Name: product_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.product_images_id_seq OWNED BY public.product_images.id;
+
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.products (
+    id bigint NOT NULL,
+    name character varying,
+    is_public boolean,
+    price character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    dimension_x integer,
+    dimension_y integer,
+    dimension_z integer,
+    amount bigint DEFAULT 0,
+    card_image character varying,
+    color character varying,
+    material character varying
+);
+
+
+ALTER TABLE public.products OWNER TO pat;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO pat;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO pat;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: pat
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    email character varying,
+    password character varying,
+    full_name character varying,
+    address character varying,
+    phone character varying,
+    age character varying,
+    role integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    gender character varying,
+    password_digest character varying
+);
+
+
+ALTER TABLE public.users OWNER TO pat;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: pat
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO pat;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pat
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: banners id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.banners ALTER COLUMN id SET DEFAULT nextval('public.banners_id_seq'::regclass);
+
+
+--
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
+
+
+--
+-- Name: category_products id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.category_products ALTER COLUMN id SET DEFAULT nextval('public.category_products_id_seq'::regclass);
+
+
+--
+-- Name: order_deliveries id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.order_deliveries ALTER COLUMN id SET DEFAULT nextval('public.order_deliveries_id_seq'::regclass);
+
+
+--
+-- Name: order_details id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.order_details ALTER COLUMN id SET DEFAULT nextval('public.order_details_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- Name: product_images id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.product_images ALTER COLUMN id SET DEFAULT nextval('public.product_images_id_seq'::regclass);
+
+
+--
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2021-04-04 05:27:21.306603	2021-04-04 05:27:21.306603
+\.
+
+
+--
+-- Data for Name: banners; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.banners (id, name, image, is_public, url, sort_order, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.categories (id, name, parent_id, created_at, updated_at, is_public) FROM stdin;
+1	Furniture	0	2021-04-04 05:27:25.019767	2021-04-04 05:27:25.019767	t
+2	Baby furniture	0	2021-04-04 05:27:25.063538	2021-04-04 05:27:25.063538	t
+3	Decoration	0	2021-04-04 05:27:25.065724	2021-04-04 05:27:25.065724	t
+4	Decosy Best Sellers	0,1	2021-04-04 05:27:25.073091	2021-04-04 05:27:25.073091	t
+5	Living Room	0,1	2021-04-04 05:27:25.105989	2021-04-04 05:27:25.105989	t
+6	Dinning Room	0,1	2021-04-04 05:27:25.108472	2021-04-04 05:27:25.108472	t
+7	Bedroom	0,1	2021-04-04 05:27:25.111016	2021-04-04 05:27:25.111016	t
+8	Bathroom	0,1	2021-04-04 05:27:25.113296	2021-04-04 05:27:25.113296	t
+9	Kitchen	0,1	2021-04-04 05:27:25.115696	2021-04-04 05:27:25.115696	t
+10	Office	0,1	2021-04-04 05:27:25.118502	2021-04-04 05:27:25.118502	t
+11	Best Sellers	0,2	2021-04-04 05:27:25.121424	2021-04-04 05:27:25.121424	t
+12	Baby Furniture	0,2	2021-04-04 05:27:25.130208	2021-04-04 05:27:25.130208	t
+13	Children`s Furniture	0,2	2021-04-04 05:27:25.132895	2021-04-04 05:27:25.132895	t
+14	Teeb Furniture	0,2	2021-04-04 05:27:25.157749	2021-04-04 05:27:25.157749	t
+15	Decor	0,3	2021-04-04 05:27:25.160954	2021-04-04 05:27:25.160954	t
+16	Lighting	0,3	2021-04-04 05:27:25.163432	2021-04-04 05:27:25.163432	t
+17	Walldecor	0,3	2021-04-04 05:27:25.166064	2021-04-04 05:27:25.166064	t
+18	Tableware	0,3	2021-04-04 05:27:25.172389	2021-04-04 05:27:25.172389	t
+19	Furniture Best Sellers	0,1,4	2021-04-04 05:27:25.175674	2021-04-04 05:27:25.175674	t
+20	Sofas & Armchairs	0,1,5	2021-04-04 05:27:25.178543	2021-04-04 05:27:25.178543	t
+21	Bars & Counters	0,1,6	2021-04-04 05:27:25.181123	2021-04-04 05:27:25.181123	t
+22	Beds	0,1,7	2021-04-04 05:27:25.183473	2021-04-04 05:27:25.183473	t
+23	Bathroom Shelves	0,1,8	2021-04-04 05:27:25.18751	2021-04-04 05:27:25.18751	t
+24	Kitchen Shelves	0,1,9	2021-04-04 05:27:25.190105	2021-04-04 05:27:25.190105	t
+25	Bookcases	0,1,10	2021-04-04 05:27:25.233712	2021-04-04 05:27:25.233712	t
+26	Trendy	0	2021-04-04 05:27:25.236373	2021-04-04 05:27:25.236373	t
+27	New furniture	0	2021-04-04 05:27:25.239203	2021-04-04 05:27:25.239203	t
+35	test 123	0	2021-04-04 05:37:45.002518	2021-04-04 05:40:11.722186	f
+36	123	0,35	2021-04-04 05:40:01.024956	2021-04-04 05:40:11.798061	f
+\.
+
+
+--
+-- Data for Name: category_products; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.category_products (id, category_id, product_id, created_at, updated_at) FROM stdin;
+1	26	1	2021-04-04 05:27:25.448828	2021-04-04 05:27:25.448828
+2	27	1	2021-04-04 05:27:25.495555	2021-04-04 05:27:25.495555
+3	4	1	2021-04-04 05:27:25.498947	2021-04-04 05:27:25.498947
+4	4	2	2021-04-04 06:24:08.350508	2021-04-04 06:24:08.350508
+5	6	2	2021-04-04 06:24:08.354964	2021-04-04 06:24:08.354964
+6	7	2	2021-04-04 06:24:08.356125	2021-04-04 06:24:08.356125
+7	23	2	2021-04-04 06:24:08.359675	2021-04-04 06:24:08.359675
+12	1	4	2021-04-04 07:13:50.092974	2021-04-04 07:13:50.092974
+13	26	4	2021-04-04 07:13:50.094927	2021-04-04 07:13:50.094927
+14	27	4	2021-04-04 07:13:50.097269	2021-04-04 07:13:50.097269
+15	1	5	2021-04-04 07:49:08.407565	2021-04-04 07:49:08.407565
+16	26	5	2021-04-04 07:49:08.409136	2021-04-04 07:49:08.409136
+17	27	5	2021-04-04 07:49:08.410603	2021-04-04 07:49:08.410603
+18	1	6	2021-04-04 07:49:35.165393	2021-04-04 07:49:35.165393
+19	26	6	2021-04-04 07:49:35.167663	2021-04-04 07:49:35.167663
+20	27	6	2021-04-04 07:49:35.170735	2021-04-04 07:49:35.170735
+\.
+
+
+--
+-- Data for Name: order_deliveries; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.order_deliveries (id, order_id, address, full_name, phone, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: order_details; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.order_details (id, order_id, product_id, amount, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.orders (id, user_id, status, total_amount, uuid, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: product_images; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.product_images (id, product_id, file_data, created_at, updated_at, sort_order) FROM stdin;
+8	5	91021656_827499407734410_6114817026046296064_n.jpg	2021-04-04 07:49:09.068104	2021-04-04 07:49:09.068104	0
+9	5	91117969_641169029762161_5429628626888818688_n.jpg	2021-04-04 07:49:09.271307	2021-04-04 07:49:09.271307	0
+10	5	91185731_232011334817468_6350709154067251200_n.jpg	2021-04-04 07:49:09.475362	2021-04-04 07:49:09.475362	0
+11	6	91021656_827499407734410_6114817026046296064_n.jpg	2021-04-04 07:49:36.009977	2021-04-04 07:49:36.009977	0
+12	6	91117969_641169029762161_5429628626888818688_n.jpg	2021-04-04 07:49:36.344759	2021-04-04 07:49:36.344759	0
+13	6	91185731_232011334817468_6350709154067251200_n.jpg	2021-04-04 07:49:36.570112	2021-04-04 07:49:36.570112	0
+17	4	91021656_827499407734410_6114817026046296064_n.jpg	2021-04-04 07:54:19.778536	2021-04-04 07:54:19.778536	0
+18	4	91117969_641169029762161_5429628626888818688_n.jpg	2021-04-04 07:54:19.99417	2021-04-04 07:54:19.99417	0
+19	4	91185731_232011334817468_6350709154067251200_n.jpg	2021-04-04 07:54:20.282199	2021-04-04 07:54:20.282199	0
+\.
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.products (id, name, is_public, price, description, created_at, updated_at, dimension_x, dimension_y, dimension_z, amount, card_image, color, material) FROM stdin;
+1	BIPLANE - Red table clock	t	900000	Add a touch of fun decoration to a room with this Biplane in metal. It'll look great anywhere and surely add up to your decoration! Your kid will love it, but you might love it more yourself. So which room its going to go ?	2021-04-04 05:27:25.278272	2021-04-04 05:27:25.278272	24	20	15	0	\N	\N	\N
+2	Test	t	3333333	asdasdsadsd	2021-04-04 06:24:08.303025	2021-04-04 06:24:08.303025	123	321	23	0	\N	Red	Wood
+5	Test	t	312312321	sfdsadsa	2021-04-04 07:49:08.404613	2021-04-04 07:49:08.404613	11	22	33	233	\N	Red	Wood
+6	Test	t	312312321	sfdsadsa	2021-04-04 07:49:35.15757	2021-04-04 07:49:35.15757	11	22	33	233	\N	Red	Wood
+4	Test123	t	312312321	sfdsadsa	2021-04-04 07:13:50.089349	2021-04-04 07:55:10.105072	11	22	33	233	67385731-480px.jpg	Red	Wood
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20210323113740
+20210323114205
+20210323133159
+20210323133233
+20210323133710
+20210325033049
+20210325063047
+20210325063152
+20210326022831
+20210326022850
+20210326022936
+20210326022943
+20210326023055
+20210326063116
+20210327050814
+20210329150930
+20210329151001
+20210331135910
+20210331140512
+20210402025701
+20210402043138
+20210402143517
+20210402144920
+20210403095104
+20210403114029
+20210404055958
+20210404062643
+20210404070921
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: pat
+--
+
+COPY public.users (id, email, password, full_name, address, phone, age, role, created_at, updated_at, gender, password_digest) FROM stdin;
+1	user@example.com	\N	User	39 Nguyễn Thị Diệu p5 q3	123456789	28	0	2021-04-04 05:27:25.845123	2021-04-04 05:27:25.845123	male	$2a$12$b8LKoiy/ZBmGWQZxHOaGQeKfSJlTdoo64ohst2HyMbXtNtyogtswi
+2	admin@example.com	\N	Admin	\N	\N	28	1	2021-04-04 05:27:26.089734	2021-04-04 05:27:26.089734	male	$2a$12$1wnG.y6WOQBG6Un/V3CQKOd44z32FkElcZchCPjoFtqmHd0nDZFO6
+\.
+
+
+--
+-- Name: banners_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.banners_id_seq', 1, false);
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.categories_id_seq', 36, true);
+
+
+--
+-- Name: category_products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.category_products_id_seq', 20, true);
+
+
+--
+-- Name: order_deliveries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.order_deliveries_id_seq', 1, false);
+
+
+--
+-- Name: order_details_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.order_details_id_seq', 1, false);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+
+
+--
+-- Name: product_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.product_images_id_seq', 19, true);
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.products_id_seq', 6, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: banners banners_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.banners
+    ADD CONSTRAINT banners_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: category_products category_products_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.category_products
+    ADD CONSTRAINT category_products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_deliveries order_deliveries_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.order_deliveries
+    ADD CONSTRAINT order_deliveries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_details order_details_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.order_details
+    ADD CONSTRAINT order_details_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_images product_images_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.product_images
+    ADD CONSTRAINT product_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: pat
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_category_products_on_category_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_category_products_on_category_id ON public.category_products USING btree (category_id);
+
+
+--
+-- Name: index_category_products_on_product_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_category_products_on_product_id ON public.category_products USING btree (product_id);
+
+
+--
+-- Name: index_order_deliveries_on_order_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_order_deliveries_on_order_id ON public.order_deliveries USING btree (order_id);
+
+
+--
+-- Name: index_order_details_on_order_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_order_details_on_order_id ON public.order_details USING btree (order_id);
+
+
+--
+-- Name: index_order_details_on_product_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_order_details_on_product_id ON public.order_details USING btree (product_id);
+
+
+--
+-- Name: index_orders_on_user_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_orders_on_user_id ON public.orders USING btree (user_id);
+
+
+--
+-- Name: index_product_images_on_product_id; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_product_images_on_product_id ON public.product_images USING btree (product_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: pat
+--
+
+CREATE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
