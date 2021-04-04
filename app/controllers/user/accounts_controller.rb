@@ -7,7 +7,7 @@ class User::AccountsController < User::BaseController
       @user = User.new
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
+    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
   end
 
   def update_profile

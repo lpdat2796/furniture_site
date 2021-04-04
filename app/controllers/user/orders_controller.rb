@@ -5,7 +5,7 @@ class User::OrdersController < User::BaseController
       return
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
+    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
     @order = current_user.orders.find_by(status: 'draft')
     @order_details = @order&.order_details || []
     @list_orders = current_user.orders.where.not(status: 'draft')
@@ -48,7 +48,7 @@ class User::OrdersController < User::BaseController
       return
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
+    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
     @order = current_user.orders.find_by(status: 'draft')
     @order_details = @order&.order_details || []
     @order = Order.where(id: params[:id]).where.not(status: 'draft').first

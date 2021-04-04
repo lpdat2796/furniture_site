@@ -7,7 +7,7 @@ class User::CategoriesController < User::BaseController
       @user = User.new
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: nil, is_public: true)
+    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
     if params[:id]
       @category = Category.find(params[:id])
       @products = @category.products.where(is_public: true)

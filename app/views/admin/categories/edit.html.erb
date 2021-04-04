@@ -1,0 +1,44 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit category</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <!-- /.card-header -->
+      <%= form_for @category, url: admin_category_path, method: :put do |f| %>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Name</label>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Parent category</label>
+            <%= f.select(:parent_id, options_for_select(category_options_array(@categories), @category.parent_id.split(',').last), { include_blank: true }, { class: 'form-control' }) %>
+          </div>
+          <div class="form-group">
+            <label>Public</label>
+            <div>
+              <%= f.radio_button("is_public", "true") %>
+              <%= label :is_public, 'True' %>
+            </div>
+            <div>
+              <%= f.radio_button("is_public", "false", checked: true) %>
+              <%= label :is_public, 'False' %>
+            </div>
+          </div>
+        <!-- /.card-body -->
+          <div style='text-align: right;'>
+            <%= f.submit 'Submit', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</section>

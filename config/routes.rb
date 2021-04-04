@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     resources :banners
     resources :users
     resources :staffs
+    resources :categories
   end
 end

@@ -7,4 +7,7 @@ class Product < ApplicationRecord
   has_many :colors, through: :color_products
   has_many :material_products
   has_many :materials, through: :material_products
+
+  # Mount to file upload
+  mount_uploader :cover_image, ImageUploader
 end
