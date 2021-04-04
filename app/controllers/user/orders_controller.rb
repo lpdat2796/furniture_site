@@ -32,12 +32,12 @@ class User::OrdersController < User::BaseController
     if old_order.present?
       amount = old_order.amount
       old_order.update(amount: amount + 1)
-      total_amount = order.total_amount
-      order.update(total_amount: total_amount + product.price.to_i)
     else
       order.order_details.create(product_id: product.id)
-      order.update(total_amount: product.price)
     end
+
+    total_amount = order.total_amount.to_i
+    order.update(total_amount: total_amount + product.price.to_i)
 
     render json: { can_buy: true }
   end
@@ -59,11 +59,16 @@ class User::OrdersController < User::BaseController
     amount = order_detail.amount
 
     if amount < 2
+      order_detail.order.update(total_amount: 0)
       order_detail.destroy
-      redirect_to user_orders_path
     else
+      order = order_detail.order
+      product = order_detail.product
+      order.update(total_amount: order.amount.to_i - product.price.to_i)
       order_detail.update(amount: amount - 1)
     end
+
+    redirect_to user_carts_path
   end
 
   def checkout

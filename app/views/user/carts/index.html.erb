@@ -42,7 +42,7 @@
                         <td class='order-detail-amount-<%= order_detail.id %>'><%= order_detail.amount %></td>
                         <td>$<%= order_detail.product.price %></td>
                         <td>
-                          <%= link_to user_orders_path(order_detail.id), method: :delete, class: 'product-remove', data: { confirm: 'Are you sure you want to delete it?' } do %>
+                          <%= link_to user_order_path(order_detail.id), method: :delete, class: 'product-remove', data: { confirm: 'Are you sure you want to delete it?' } do %>
                             <i class="fas fa-trash" style='font-size: 2.5rem;'></i>
                           <% end %>
                         </td>

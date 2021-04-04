@@ -58,13 +58,21 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="<%= admin_orders_path %>" class="nav-link" id='orders'>
+        <li class="nav-item" id='orders-list'>
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-shopping-cart"></i>
             <p>
               Orders
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<%= admin_orders_path %>" class="nav-link" id='orders'>
+                Invoice
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
