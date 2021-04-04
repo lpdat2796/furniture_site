@@ -37,6 +37,9 @@ Rails.application.routes.draw do
     resources :orders do
       get 'rejected_orders', on: :collection
       get 'rejected_orders/:id', to: 'orders#rejected_order_detail', as: 'rejected_order_detail', on: :collection
+      get 'shipments', on: :collection
+      get 'shipments/:id', to: 'orders#shipment_detail', as: 'shipment_detail', on: :collection
+      post 'shipment_detail_update', on: :collection
     end
   end
 end

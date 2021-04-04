@@ -31,4 +31,24 @@ class Admin::OrdersController < Admin::BaseController
   def rejected_order_detail
     @order = Order.where(id: params[:id], status: 'rejected').first
   end
+
+  def shipments
+    @orders = Order.where(status: 'delivery')
+  end
+
+  def shipment_detail
+    @order = Order.where(id: params[:id], status: 'delivery').first
+  end
+
+  def shipment_detail_update
+    @order = Order.find(params[:id])
+
+    if @order.update(expected_shipment_date: params[:order][:shipment_date], status: 'completed')
+      flash[:success] = 'Update shipment successfully'
+      redirect_to shipments_admin_orders_path
+    else
+      flash.now[:danger] = 'Update order failed'
+      render :shipment_detail
+    end
+  end
 end
