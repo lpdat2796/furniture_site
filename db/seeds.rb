@@ -39,20 +39,7 @@ trendy = Category.create(name: 'Trendy', is_public: true)
 new_furniture = Category.create(name: 'New furniture', is_public: true)
 
 product = Product.create(name: 'BIPLANE - Red table clock', price: 900000, description: "Add a touch of fun decoration to a room with this Biplane in metal. It'll look great anywhere and surely add up to your decoration! Your kid will love it, but you might love it more yourself. So which room its going to go ?",
-  dimension_x: 24, dimension_y: 20, dimension_z: 15, is_public: true)
-
-color_1 = Color.create(name: "Natural beech", code: "#efe6c8")
-color_2 = Color.create(name: "White", code: "#fff")
-material_1 = Material.create(name: "Acacia")
-material_2 = Material.create(name: "Beech wood")
-
-product.category_products.create(category_id: trendy.id)
-product.category_products.create(category_id: new_furniture.id)
-product.category_products.create(category_id: decosy_best_seller.id)
-product.color_products.create(color_id: color_1.id)
-product.color_products.create(color_id: color_2.id)
-product.material_products.create(material_id: material_1.id)
-product.material_products.create(material_id: material_2.id)
+  dimension_x: 24, dimension_y: 20, dimension_z: 15, is_public: true, color: 'Red', material: 'Wood')
 
 user = User.create(email: 'user@example.com', role: 'user', full_name: 'User', phone: '123456789', address: '39 Nguyễn Thị Diệu p5 q3', age: '28', gender: 'male', password: '12345678')
 admin = User.create(email: 'admin@example.com', role: 'admin', full_name: 'Admin', age: '28', gender: 'male', password: '12345678')

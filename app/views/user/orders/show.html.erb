@@ -19,7 +19,7 @@
                       <tr id='order-detail-<%= order_detail.id %>'>
                         <td class="">
                           <div class="product-info">
-                            <img width="80" src="<%= order_detail.product.product_images.order(sort_order: :desc).first.file_data.url %>" alt="" />
+                            <img width="80" src="<%= order_detail.product.card_image.url %>" alt="" />
                             <a href="#!"><%= order_detail.product.name %></a>
                           </div>
                         </td>

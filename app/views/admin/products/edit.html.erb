@@ -1,0 +1,84 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit product</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <!-- /.card-header -->
+      <%= form_for @product, url: admin_product_path, method: :put do |f| %>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Name</label>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Card Image</label>
+            <%= f.file_field :card_image, class: 'form-control', style: 'height: 44px;' %>
+          </div>
+          <div class="form-group">
+            <label>Images</label>
+            <%= f.file_field :product_images_file_data, multiple: true, class: 'form-control', style: 'height: 44px;' %>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <%= f.select(:category_ids, options_for_select(category_options_array(@categories), f.object.categories.pluck(:id)), {}, class: 'form-control', multiple: true, size: 10) %>
+          </div>
+          <div class="form-group">
+            <label>Public</label>
+            <div>
+              <%= f.radio_button("is_public", "true") %>
+              <%= label :is_public, 'True' %>
+            </div>
+            <div>
+              <%= f.radio_button("is_public", "false") %>
+              <%= label :is_public, 'False' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <%= f.number_field :price, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <%= f.number_field :amount, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Color</label>
+            <%= f.text_field :color, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Material</label>
+            <%= f.text_field :material, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Dimension X</label>
+            <%= f.number_field :dimension_x, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Dimension Y</label>
+            <%= f.number_field :dimension_y, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Dimension Z</label>
+            <%= f.number_field :dimension_z, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <%= f.text_area :description, class: 'form-control' %>
+          </div>
+        <!-- /.card-body -->
+          <div style='text-align: right;'>
+            <%= f.submit 'Submit', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</section>

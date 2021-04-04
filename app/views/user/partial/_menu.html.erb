@@ -23,12 +23,14 @@
 									class="tf-ion-ios-arrow-down"></span></a>
 							<div class="dropdown-menu">
 								<div class="row">
-									<% Category.where(parent_id: parent_category.id, is_public: true).limit(4).offset(0).each do |child_category| %>
+									<% child_categories_1 = Category.where('parent_id LIKE ? AND is_public = ?', "%#{ parent_category.id }", true).limit(4).offset(0).reject { |category| category.parent_id.split(',').length > 2 } %>
+									<% child_categories_1.each do |child_category| %>
 										<div class="col-sm-3 col-xs-12">
 											<ul>
 												<li class="dropdown-header"><%= child_category.name %></li>
 												<li role="separator" class="divider"></li>
-												<% Category.where(parent_id: "#{ parent_category.id },#{ child_category.id }", is_public: true).each do |category| %>
+												<% grandchild_categories = Category.where('parent_id LIKE ? AND is_public = ?', "%#{ child_category.id }", true).reject { |category| category.parent_id.split(',').length > 3 } %>
+												<% grandchild_categories.each do |category| %>
 													<li><a href="<%= user_categories_path(id: category.id) %>"><%= category.name %></a></li>
 												<% end %>
 											</ul>
@@ -36,12 +38,14 @@
 									<% end %>
 								</div>
 								<div class="row mt-10">
-									<% Category.where(parent_id: parent_category.id, is_public: true).limit(4).offset(4).each do |child_category| %>
+								<% child_categories_2 = Category.where('parent_id LIKE ? AND is_public = ?', "%#{ parent_category.id }", true).limit(4).offset(4).reject { |category| category.parent_id.split(',').length > 2 } %>
+									<% child_categories_2.each do |child_category| %>
 										<div class="col-sm-3 col-xs-12">
 											<ul>
 												<li class="dropdown-header"><%= child_category.name %></li>
 												<li role="separator" class="divider"></li>
-												<% Category.where(parent_id: "#{ parent_category.id },#{ child_category.id }", is_public: true).each do |category| %>
+												<% grandchild_categories = Category.where('parent_id LIKE ? AND is_public = ?', "%#{ child_category.id }", true).reject { |category| category.parent_id.split(',').length > 3 } %>
+												<% grandchild_categories.each do |category| %>
 													<li><a href="<%= user_categories_path(id: category.id) %>"><%= category.name %></a></li>
 												<% end %>
 											</ul>

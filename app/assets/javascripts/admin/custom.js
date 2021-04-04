@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-  if (location.pathname.split('/')[2] != undefined) {
+  if (location.pathname.split('/')[2] != undefined && location.pathname.split('/')[2] != '') {
     $(".nav>li.nav-item").each(function() {
       var navItem = $(this);
 

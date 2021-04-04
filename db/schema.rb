@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210403114029) do
+ActiveRecord::Schema.define(version: 20210404070921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,37 +40,6 @@ ActiveRecord::Schema.define(version: 20210403114029) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_category_products_on_category_id"
     t.index ["product_id"], name: "index_category_products_on_product_id"
-  end
-
-  create_table "color_products", force: :cascade do |t|
-    t.bigint "color_id"
-    t.bigint "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["color_id"], name: "index_color_products_on_color_id"
-    t.index ["product_id"], name: "index_color_products_on_product_id"
-  end
-
-  create_table "colors", force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "material_products", force: :cascade do |t|
-    t.bigint "material_id"
-    t.bigint "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["material_id"], name: "index_material_products_on_material_id"
-    t.index ["product_id"], name: "index_material_products_on_product_id"
-  end
-
-  create_table "materials", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "order_deliveries", force: :cascade do |t|
@@ -115,15 +84,17 @@ ActiveRecord::Schema.define(version: 20210403114029) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.boolean "is_public"
-    t.integer "price"
+    t.string "price"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "dimension_x"
     t.integer "dimension_y"
     t.integer "dimension_z"
-    t.integer "amount", default: 0
-    t.string "cover_image"
+    t.bigint "amount", default: 0
+    t.string "card_image"
+    t.string "color"
+    t.string "material"
   end
 
   create_table "users", force: :cascade do |t|

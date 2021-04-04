@@ -9,13 +9,13 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def create
-    @categories = Category.all
     @category = Category.new(params[:category].permit!)
 
     if @category.save
       flash[:success] = 'Create category successfully.'
       redirect_to admin_categories_path
     else
+      @categories = Category.all
       flash.now[:danger] = 'Create category failed.'
       render :new
     end
@@ -63,8 +63,8 @@ class Admin::CategoriesController < Admin::BaseController
       flash[:success] = 'Delete category successfully.'
       redirect_to admin_categories_path
     else
-      flash.now[:danger] = 'Delete category failed.'
-      render :new
+      flash[:danger] = 'Delete category successfully.'
+      redirect_to admin_categories_path
     end
   end
 end

@@ -12,19 +12,19 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="title text-center">
-					<h2>New products</h2>
+					<h2><%= @new_category.name %></h2>
 				</div>
 			</div>
 			<% @new_products.each do |product| %>
 				<div class="col-md-6">
 					<div class="category-box">
 						<a href="<%= user_product_path(id: product.id, category_id: @new_category.id) %>">
-							<img src="<%= product.product_images.first.file_data.url %>" alt="" class='fix-image' />
-							<div class="content">
-								<h3><%= product.name %></h3>
-							</div>
-						</a>	
+							<img src="<%= product.card_image.url %>" alt="" class='fix-image' />
+						</a>
 					</div>
+					<a href="<%= user_product_path(id: product.id, category_id: @new_category.id) %>">
+						<h3><%= product.name %></h3>
+					</a>
 				</div>
 			<% end %>
 		</div>
@@ -36,7 +36,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="title text-center">
-				<h2>Trendy Products</h2>
+					<h2><%= @trendy_category.name %></h2>
 			</div>
 		</div>
 		<div class="row">
@@ -44,7 +44,7 @@
 				<div class="col-md-4">
 					<div class="product-item">
 						<div class="product-thumb">
-							<img class="img-responsive" src="<%= product.product_images.first.file_data.url %>" alt="product-img" />
+							<img class="img-responsive" src="<%= product.card_image.url %>" alt="product-img" />
 							<div class="preview-meta">
 								<ul>
 									<li>
@@ -82,7 +82,7 @@
 										<div class="row">
 											<div class="col-md-8 col-sm-6 col-xs-12">
 												<div class="modal-image">
-													<img class="img-responsive" src="<%= product.product_images.first.file_data.url %>" alt="product-img" />
+													<img class="img-responsive" src="<%= product.card_image.url %>" alt="product-img" />
 												</div>
 											</div>
 											<div class="col-md-4 col-sm-6 col-xs-12">

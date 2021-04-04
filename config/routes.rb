@@ -33,5 +33,6 @@ Rails.application.routes.draw do
     resources :users
     resources :staffs
     resources :categories
+    resources :products
   end
 end

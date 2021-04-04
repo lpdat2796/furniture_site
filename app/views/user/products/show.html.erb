@@ -16,33 +16,42 @@
 		<div class="row mt-20">
 			<div class="col-md-5">
 				<div class="single-product-slider">
-					<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
-						<div class='carousel-outer'>
-							<!-- me art lab slider -->
-              <div class='carousel-inner '>
-								<div class='item active'>
-									<img src='<%= @images.first.file_data.url %>' alt='' data-zoom-image="<%= @images.first.file_data.url %>" />
-                </div>
-                <% @images.offset(1).each do |image| %>
-                  <div class='item'>
-                    <img src='<%= image.file_data.url %>' alt='' data-zoom-image="<%= image.file_data.url %>" />
-                  </div>
-                <% end %>
+					<% if @images.present? %>
+						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+							<div class='carousel-outer'>
+								<!-- me art lab slider -->
+								<div class='carousel-inner '>
+									<div class='item active'>
+										<img src='<%= @product.card_image.url %>' alt='' data-zoom-image="<%= @product.card_image.url %>" style='object-fit: cover; height: 500px; width: 450px;' />
+									</div>
+									<% @images.each do |image| %>
+										<div class='item'>
+											<img src='<%= image.file_data.url %>' alt='' data-zoom-image="<%= image.file_data.url %>" style='object-fit: cover; height: 500px; width: 450px;' />
+										</div>
+									<% end %>
+								</div>
+								<!-- sag sol -->
+								<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+									<i class="tf-ion-ios-arrow-left"></i>
+								</a>
+								<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+									<i class="tf-ion-ios-arrow-right"></i>
+								</a>
 							</div>
+							
+							<!-- thumb -->
+							<ol class='carousel-indicators mCustomScrollbar meartlab'>
+								<li data-target='#carousel-custom' data-slide-to='0' class='active'>
+									<img src='<%= @product.card_image.url %>' alt='' style='object-fit: cover; min-height: 60px; height: 60px;' />
+								</li>
+								<% @images.each_with_index do |image, index| %>
+									<li data-target='#carousel-custom' data-slide-to='<%= index + 1 %>'>
+										<img src='<%= image.file_data.url %>' alt='' style='object-fit: cover; min-height: 60px; height: 60px;' />
+									</li>
+								<% end %>
+							</ol>
 						</div>
-						
-						<!-- thumb -->
-						<ol class='carousel-indicators mCustomScrollbar meartlab'>
-							<li data-target='#carousel-custom' data-slide-to='0' class='active'>
-								<img src='<%= @images.first.file_data.url %>' alt='' />
-              </li>
-              <% @images.offset(1).each_with_index do |image, index| %>
-                <li data-target='#carousel-custom' data-slide-to='<%= index + 1 %>'>
-                  <img src='<%= image.file_data.url %>' alt='' />
-                </li>
-              <% end %>
-						</ol>
-					</div>
+					<% end %>
 				</div>
 			</div>
 			<div class="col-md-7">
@@ -50,20 +59,20 @@
 					<h2><%= @product.name %></h2>
 					<p class="product-price">$<%= @product.price %></p>
 					
-          <p class="product-description mt-20">
+          <p class="product-description mt-20 mb-40">
             <%= @product.description %>
 					</p>
-					<div>
+					<div class='mb-40'>
 						<strong>Dimensions (cm):</strong>
 						<span><%= "#{ @product.dimension_x } x #{ @product.dimension_y } x #{ @product.dimension_z }" %></span>
 					</div>
-					<div>
+					<div class='mb-40'>
 						<strong>Color:</strong>
-						<span><%= @product.colors.pluck(:name)&.join(', ') %></span>
+						<span><%= @product.color%></span>
 					</div>
-					<div>
+					<div class='mb-40'>
 						<strong>Material:</strong>
-						<span><%= @product.materials.pluck(:name)&.join(', ') %></span>
+						<span><%= @product.material %></span>
 					</div>
 					<% if current_user.present? %>
 						<a href="javascript:addItem(<%= product.id %>);" class="btn btn-main">Add To Cart</a>
@@ -91,7 +100,7 @@
 					<div class="col-md-3">
 						<div class="product-item">
 							<div class="product-thumb">
-								<img class="img-responsive" src="<%= product.product_images.order(sort_order: :desc).first.file_data.url %>" alt="product-img" />
+								<img class="img-responsive" src="<%= product.card_image.url %>" alt="product-img" />
 								<div class="preview-meta">
 									<ul>
 										<li>
@@ -128,7 +137,7 @@
 											<div class="row">
 												<div class="col-md-8">
 													<div class="modal-image">
-														<img class="img-responsive" src="<%= product.product_images.order(sort_order: :desc).first.file_data.url %>" />
+														<img class="img-responsive" src="<%= product.card_image.url %>" />
 													</div>
 												</div>
 												<div class="col-md-3">
