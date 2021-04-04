@@ -75,7 +75,7 @@
 						<span><%= @product.material %></span>
 					</div>
 					<% if current_user.present? %>
-						<a href="javascript:addItem(<%= product.id %>);" class="btn btn-main">Add To Cart</a>
+						<a href="javascript:addItem(<%= @product.id %>);" class="btn btn-main">Add To Cart</a>
 					<% else %>
 						<span data-toggle="modal" data-target="#login-modal" class='btn btn-main'>
 							Add To Cart
@@ -131,36 +131,36 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<i class="tf-ion-close"></i>
 						</button>
-							<div class="modal-dialog " role="document">
-								<div class="modal-content">
-										<div class="modal-body">
-											<div class="row">
-												<div class="col-md-8">
-													<div class="modal-image">
-														<img class="img-responsive" src="<%= product.card_image.url %>" />
-													</div>
+						<div class="modal-dialog " role="document">
+							<div class="modal-content">
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-md-8">
+												<div class="modal-image">
+													<img class="img-responsive" src="<%= product.card_image.url %>" />
 												</div>
-												<div class="col-md-3">
-													<div class="product-short-details">
-														<h2 class="product-title"><%= product.name %></h2>
-														<p class="product-price">$<%= product.price %></p>
-														<p class="product-short-description">
-															<%= product.description %>
-														</p>
-														<% if current_user.present? %>
-															<a href="javascript:addItem(<%= product.id %>);"><i class="tf-ion-android-cart"></i></a>
-														<% else %>
-															<span data-toggle="modal" data-target="#login-modal" class='btn btn-main'>
-																Add To Cart
-															</span>
-														<% end %>
-														<a href="<%= user_product_path(product.id) %>" class="btn btn-transparent">View Product Details</a>
-													</div>
+											</div>
+											<div class="col-md-3">
+												<div class="product-short-details">
+													<h2 class="product-title"><%= product.name %></h2>
+													<p class="product-price">$<%= product.price %></p>
+													<p class="product-short-description">
+														<%= product.description %>
+													</p>
+													<% if current_user.present? %>
+														<a href="javascript:addItem(<%= product.id %>);"><i class="tf-ion-android-cart"></i></a>
+													<% else %>
+														<span data-toggle="modal" data-target="#login-modal" class='btn btn-main'>
+															Add To Cart
+														</span>
+													<% end %>
+													<a href="<%= user_product_path(product.id) %>" class="btn btn-transparent">View Product Details</a>
 												</div>
 											</div>
 										</div>
-								</div>
+									</div>
 							</div>
+						</div>
 					</div>
 				<% end %>
 			</div>

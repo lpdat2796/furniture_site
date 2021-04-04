@@ -1,0 +1,53 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit staff</h1>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <!-- /.card-header -->
+      <%= form_for @order, url: admin_order_path, method: :put do |f| %>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Order code</label>
+            <%= text_field_tag :order_code, @order.uuid, class: 'form-control', readonly: true %>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <%= text_field_tag :email, @order.user.email, class: 'form-control', readonly: true %>
+          </div>
+          <div class="form-group">
+            <label>Full name</label>
+            <%= text_field_tag :email, @order.order_delivery.full_name, class: 'form-control', readonly: true %>
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <%= text_field_tag :email, @order.order_delivery.address, class: 'form-control', readonly: true %>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <%= text_field_tag :email, @order.order_delivery.phone, class: 'form-control', readonly: true %>
+          </div>
+          <div class="form-group">
+            <label>Expected shipment date</label>
+            <%= f.date_field :expected_shipment_date, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>Reject reason</label>
+            <%= f.text_area :reject_comment, class: 'form-control' %>
+          </div>
+          <div style='text-align: right;'>
+            <%= f.button 'Reject', type: 'submit', class: 'btn btn-danger', value: 'reject' %>
+            <%= f.button 'Submit', type: 'submit', class: 'btn btn-primary', value: 'submit' %>
+          </div>
+        </div>
+      <% end %>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</section>

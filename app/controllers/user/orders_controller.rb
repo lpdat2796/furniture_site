@@ -12,10 +12,10 @@ class User::OrdersController < User::BaseController
   end
 
   def create
-    order = current_user.orders.find_by(status: 'draft', uuid: rand.to_s[2..7])
+    order = current_user.orders.find_by(status: 'draft')
 
     if order.nil?
-      order = current_user.orders.create(status: 'draft')
+      order = current_user.orders.create(status: 'draft', uuid: rand.to_s[2..7])
     end
 
     product = Product.find(params[:product_id])
@@ -33,7 +33,7 @@ class User::OrdersController < User::BaseController
       amount = old_order.amount
       old_order.update(amount: amount + 1)
       total_amount = order.total_amount
-      order.update(total_amount: total_amount + product.price)
+      order.update(total_amount: total_amount + product.price.to_i)
     else
       order.order_details.create(product_id: product.id)
       order.update(total_amount: product.price)
