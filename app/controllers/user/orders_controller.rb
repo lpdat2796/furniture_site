@@ -75,6 +75,7 @@ class User::OrdersController < User::BaseController
     order = Order.find(params[:order_id])
     order.update(status: 'processing')
     OrderDelivery.create(address: params[:address], phone: params[:phone], full_name: params[:full_name], order_id: params[:order_id])
+    OrdersMailer.send_processing_mailer(current_user, order).deliver_now
     redirect_to complete_user_carts_path
   end
 end

@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title></title>
+    <link href="https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <h1>Your order is ready to be delivered to you <%= @user.full_name %>!</h1>
+
+            <p>We have just handed over your order to shipping partner AVIATO Team. Orders will be delivered on <%= @order.expected_shipment_date.to_date %></p>
+
+            <h3>ORDER INFORMATION <%= @order.uuid %><span style="color:rgb(119, 119, 119); font-size:12px">(<%= @order.created_at.to_date %>)</span></h3>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Billing Information</th>
+                  <th>Delivery address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= @user.full_name %><br />
+                  <a href="mailto:<%= @user.email %>" target="_blank"><%= @user.email %></a><br />
+                  <%= @user.phone %></td>
+                  <td><%= @order.order_delivery.full_name %><br />
+                  <%= @order.order_delivery.address %><br />
+                  T: <%= @order.order_delivery.phone %></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>ORDER DETAILS</h2>
+
+    <table border="0" cellpadding="0" cellspacing="0" style="width:100%" class='cke_show_border'>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_details.each do |detail| %>
+          <tr>
+            <td><%= detail.product.name %></td>
+            <td>$<%= detail.product.price %></td>
+            <td><%= detail.amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4"><strong>Total</strong></td>
+          <td><strong>$<%= @order.total_amount %></strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

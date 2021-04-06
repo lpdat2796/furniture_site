@@ -12,11 +12,20 @@ class Admin::OrdersController < Admin::BaseController
 
     if params[:button] == 'reject'
       @order.update(reject_comment: params[:order][:reject_comment], status: 'rejected', whodunit: current_admin.id, rejected_at: Time.zone.now)
+
+      @order.order_details.each do |detail|
+        product = detail.product
+        product.amount = product.amount.to_i + detail.amount.to_i
+        product.save
+      end
+      OrdersMailer.send_rejected_mailer(@order.user, @order).deliver_now
     else
       unless @order.update(expected_shipment_date: params[:order][:expected_shipment_date], status: 'delivery')
         flash.now[:danger] = 'Update order failed'
         render :edit
         return
+      else
+        OrdersMailer.send_delivery_mailer(@order.user, @order).deliver_now
       end
     end
 
@@ -44,6 +53,7 @@ class Admin::OrdersController < Admin::BaseController
     @order = Order.find(params[:id])
 
     if @order.update(shipment_date: params[:order][:shipment_date], status: 'completed')
+      OrdersMailer.send_completed_mailer(@order.user, @order).deliver_now
       flash[:success] = 'Update shipment successfully'
       redirect_to shipments_admin_orders_path
     else

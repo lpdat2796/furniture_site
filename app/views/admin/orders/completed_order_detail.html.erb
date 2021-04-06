@@ -52,7 +52,7 @@
                             </div>
                           </div>
                           <div class="col-auto align-self-center">
-                            <div class="badge bg-dark number-product">x <%= detail.product.amount %></div>
+                            <div class="badge bg-dark number-product">x <%= detail.amount %></div>
                           </div>
                         </div>
                       <% end %>
@@ -69,10 +69,6 @@
           <div class="form-group">
             <label>Shipment date</label>
             <%= f.date_field :shipment_date, class: 'form-control', readonly: true %>
-          </div>
-          <div style='text-align: right;'>
-            <%= f.button 'Reject', type: 'submit', class: 'btn btn-danger', value: 'reject' %>
-            <%= f.button 'Submit', type: 'submit', class: 'btn btn-primary', value: 'submit' %>
           </div>
         </div>
       <% end %>

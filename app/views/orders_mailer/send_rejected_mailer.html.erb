@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title></title>
+    <link href="https://svc.webspellchecker.net/spellcheck31/lf/scayt3/ckscayt/css/wsc.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <h1>Dear <%= @user.full_name %>.</h1>
+
+            <p>
+              Your order <%= @order.uuid %> is rejected because '<%= @order.reject_comment %>'. We sorry for this inconvenience. 
+              Please visit <%= link_to 'AVIATO', user_root_url %> to continue shopping. Thank you very much!
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>ORDER DETAILS</h2>
+
+    <table border="0" cellpadding="0" cellspacing="0" style="width:100%" class='cke_show_border'>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_details.each do |detail| %>
+          <tr>
+            <td><%= detail.product.name %></td>
+            <td>$<%= detail.product.price %></td>
+            <td><%= detail.amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4"><strong>Total</strong></td>
+          <td><strong>$<%= @order.total_amount %></strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

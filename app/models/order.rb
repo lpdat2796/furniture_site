@@ -6,6 +6,7 @@ class Order < ApplicationRecord
 
   # Validations
   validates :expected_shipment_date, presence: true, if: -> { status == 'delivery' }
+  validates :reject_comment, presence: true, if: -> { status == 'rejected' }
   validates :shipment_date, presence: true, if: -> { status == 'completed' }
 
   def get_color_label
@@ -14,9 +15,9 @@ class Order < ApplicationRecord
       'label-primary'
     when 'delivery'
       'label-warning'
-    when 'complete'
+    when 'completed'
       'label-success'
-    when 'canceled'
+    when 'rejected'
       'label-danger'
     end
   end
