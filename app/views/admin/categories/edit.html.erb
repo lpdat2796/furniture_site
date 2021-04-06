@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <label>Parent category</label>
-            <%= f.select(:parent_id, options_for_select(category_options_array(@categories), @category.parent_id.split(',').last), { include_blank: true }, { class: 'form-control' }) %>
+            <%= f.select(:parent_id, options_for_select(category_options_array(@categories), @category.parent_id.split(',').last), { include_blank: "&nbsp;".html_safe }, { class: 'form-control' }) %>
           </div>
           <div class="form-group">
             <label>Public</label>

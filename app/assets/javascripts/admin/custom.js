@@ -26,4 +26,6 @@ $(document).ready(function() {
       $($(".nav>li.nav-item")[0]).find('a').addClass("active");
     }; 
   }
+
+  $('select.form-control').select2();
 });
