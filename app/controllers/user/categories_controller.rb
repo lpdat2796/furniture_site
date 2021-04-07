@@ -12,7 +12,7 @@ class User::CategoriesController < User::BaseController
       @category = Category.find(params[:id])
       @products = @category.products.where(is_public: true).page(params[:page]).per(15)
     else
-      @products = Product.page(params[:page]).per(15)
+      @products = Product.where('name LIKE ?', "%#{ params[:search] }%").page(params[:page]).per(15)
     end
   end
 end
