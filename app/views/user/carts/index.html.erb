@@ -37,7 +37,7 @@
                         <td class="">
                           <div class="product-info">
                             <img width="80" src="<%= order_detail.product.card_image.url %>" alt="" />
-                            <a href="#!"><%= order_detail.product.name %></a>
+                            <a href="<%= user_product_path(order_detail.product.id) %>"><%= order_detail.product.name %></a>
                           </div>
                         </td>
                         <td class='order-detail-amount-<%= order_detail.id %>'><%= order_detail.amount %></td>
@@ -128,5 +128,4 @@
 </div>
 <script>
   var typeChange = '';
-  var isMax = false;
 </script>

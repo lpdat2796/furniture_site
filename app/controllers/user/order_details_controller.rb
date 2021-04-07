@@ -1,6 +1,7 @@
 class User::OrderDetailsController < User::BaseController
   def update
     order_detail = OrderDetail.find(params[:id])
+    order = order_detail.order
     product = order_detail.product
     value = params[:value].to_i
     product_amount = product.amount.to_i
@@ -38,7 +39,9 @@ class User::OrderDetailsController < User::BaseController
       is_latest_product = true
     end
 
-    render json: { is_latest_product: is_latest_product, amount: order_detail.amount, product_amount: product_amount }, status: 200
+    order.update(total_amount: order.total_amount.to_i + (order_detail.amount.to_i * product.price.to_i))
+
+    render json: { is_latest_product: is_latest_product, amount: order_detail.amount, product_amount: product_amount, total_amount: order.total_amount }, status: 200
   end
 
   def destroy

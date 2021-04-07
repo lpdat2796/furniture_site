@@ -81,6 +81,7 @@ $(document).ready(function() {
 
         orderDetailAmount.html(data['amount']);
         $(this).val(data['amount']);
+        $('.checkout-total').html('$ ' + data['total_amount']);
         typeChange = '';
       }
     });

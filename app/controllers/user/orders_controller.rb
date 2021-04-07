@@ -37,7 +37,7 @@ class User::OrdersController < User::BaseController
     end
 
     total_amount = order.total_amount.to_i
-    order.update(total_amount: total_amount + product.price.to_i)
+    order.update(total_amount: total_amount.to_i + product.price.to_i)
 
     render json: { can_buy: true }
   end

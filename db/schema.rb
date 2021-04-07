@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210404131711) do
+ActiveRecord::Schema.define(version: 20210407134819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20210404131711) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.string "status"
-    t.integer "total_amount"
+    t.string "total_amount"
     t.string "uuid"
     t.datetime "created_at", default: "2021-04-04 05:27:21", null: false
     t.datetime "updated_at", default: "2021-04-04 05:27:21", null: false
