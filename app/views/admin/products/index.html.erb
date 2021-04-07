@@ -21,6 +21,7 @@
           <thead>
             <tr>
               <th style="width: 10px">#</th>
+              <th>Image</th>
               <th>Name</th>
               <th>Public</th>
               <th>Price</th>
@@ -32,6 +33,9 @@
             <% @products.each do |product| %>
               <tr>
                 <td><%= product.id %></td>
+                <td>
+                  <%= image_tag product.card_image, class: 'jv-image-60-60-3' %>
+                </td>
                 <td><%= product.name %></td>
                 <td><%= product.is_public.to_s.titlecase %></td>
                 <td><%= product.price %></td>
@@ -55,5 +59,6 @@
       </div>
       <!-- /.card-body -->
     </div>
+    <%= paginate @products %>
   </div>
 </section>

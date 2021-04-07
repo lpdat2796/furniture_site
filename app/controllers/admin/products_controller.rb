@@ -1,6 +1,6 @@
 class Admin::ProductsController < Admin::BaseController
   def index
-    @products = Product.order(:id)
+    @products = Product.page(params[:page]).per(25)
   end
 
   def new

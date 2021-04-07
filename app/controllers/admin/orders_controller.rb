@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::BaseController
   def index
-    @orders = Order.where(status: 'processing')
+    @orders = Order.where(status: 'processing').page(params[:page]).per(25)
   end
 
   def edit

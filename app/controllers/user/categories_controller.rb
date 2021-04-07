@@ -10,9 +10,9 @@ class User::CategoriesController < User::BaseController
     @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
     if params[:id]
       @category = Category.find(params[:id])
-      @products = @category.products.where(is_public: true)
+      @products = @category.products.where(is_public: true).page(params[:page]).per(15)
     else
-      @products = Product.all
+      @products = Product.page(params[:page]).per(15)
     end
   end
 end

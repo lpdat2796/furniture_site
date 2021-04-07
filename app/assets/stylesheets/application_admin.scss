@@ -39,3 +39,26 @@
 .select2-selection__choice__display {
   color: black;
 }
+
+// ----------- image
+@mixin jv-image($width, $height, $border-radius) {
+  position: relative;
+  width: $width;
+  height: $height;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: bottom;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: #f1f3f8 no-repeat center/cover;
+  border-radius: $border-radius;
+  object-fit: cover;
+}
+
+.jv-image-60-60-3 {
+  @include jv-image(60px, 60px, 3px);
+}

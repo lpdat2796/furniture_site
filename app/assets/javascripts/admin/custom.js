@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   if (location.pathname.split('/')[2] == 'orders') {
     $('#orders-list').addClass('menu-open');

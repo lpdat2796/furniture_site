@@ -21,6 +21,7 @@
           <thead>
             <tr>
               <th style="width: 10px">#</th>
+              <th>Image</th>
               <th>Name</th>
               <th>Public</th>
               <th>Url</th>
@@ -31,6 +32,9 @@
             <% @banners.each do |banner| %>
               <tr>
                 <td><%= banner.id %></td>
+                <td>
+                  <%= image_tag banner.image.url, class: 'jv-image-60-60-3' %>
+                </td>
                 <td><%= banner.name %></td>
                 <td><%= banner.is_public.to_s.titlecase %></td>
                 <td><%= banner.url %></td>
@@ -53,5 +57,6 @@
       </div>
       <!-- /.card-body -->
     </div>
+    <%= paginate @banners %>
   </div>
 </section>

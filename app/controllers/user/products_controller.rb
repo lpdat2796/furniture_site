@@ -14,6 +14,6 @@ class User::ProductsController < User::BaseController
 
     @product = Product.find(params[:id])
     @images = @product.product_images.order(sort_order: :desc)
-    @related_products = Product.joins(:categories).where(categories: { id: @product.categories.ids }).where.not(id: @product.id).distinct
+    @related_products = Product.joins(:categories).where(categories: { id: @product.categories.ids }).where.not(id: @product.id).distinct.limit(5)
   end
 end
