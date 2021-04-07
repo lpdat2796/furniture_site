@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :carts do
       get 'complete', on: :collection
     end
+
+    resources :order_details
   end
 
   namespace :admin, url: '/admin' do

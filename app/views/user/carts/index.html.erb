@@ -24,10 +24,11 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th class="">Item Name</th>
-                      <th class="">Total</th>
-                      <th class="">Item Price</th>
-                      <th class="">Actions</th>
+                      <th>Item Name</th>
+                      <th>Total</th>
+                      <th>Item Price</th>
+                      <th></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -42,7 +43,24 @@
                         <td class='order-detail-amount-<%= order_detail.id %>'><%= order_detail.amount %></td>
                         <td>$<%= order_detail.product.price %></td>
                         <td>
-                          <%= link_to user_order_path(order_detail.id), method: :delete, class: 'product-remove', data: { confirm: 'Are you sure you want to delete it?' } do %>
+                          <div class="center">
+                            <div class="input-group">
+                              <span class="input-group-btn">
+                                <%= button_tag class: 'btn btn-default btn-number', data: { type: 'minus', field: "detail[#{ order_detail.id }]" }, disabled: order_detail.amount.to_i == 1 do %>
+                                  <span class="glyphicon glyphicon-minus"></span>
+                                <% end %>
+                              </span>
+                              <input type="text" name="detail[<%= order_detail.id %>]" class="form-control input-number" value="<%= order_detail.amount %>" min="1" max="<%= order_detail.product.amount.to_i + order_detail.amount.to_i %>" id='<%= order_detail.id %>'>
+                              <span class="input-group-btn">
+                                <%= button_tag class: 'btn btn-default btn-number', data: { type: 'plus', field: "detail[#{ order_detail.id }]" }, disabled: order_detail.product.amount.to_i == 0 do %>
+                                  <span class="glyphicon glyphicon-plus"></span>
+                                <% end %>
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <%= link_to user_order_detail_path(order_detail.id), method: :delete, class: 'product-remove', data: { confirm: 'Are you sure you want to delete it?' } do %>
                             <i class="fas fa-trash" style='font-size: 2.5rem;'></i>
                           <% end %>
                         </td>
@@ -53,7 +71,7 @@
                 <hr>
                 <div class="summary-total mb-40" style='text-align: right; font-weight: bold'>
                   <span>Total</span>
-                  <span class='checkout-total'>$<%= @order.total_amount %></span>
+                  <span class='checkout-total'>$ <%= @order.total_amount %></span>
                 </div>
 
                 <a class="btn btn-main pull-right" data-toggle="modal" data-target="#checkout-modal">Checkout</a>
@@ -108,3 +126,7 @@
     </div>
   </div>
 </div>
+<script>
+  var typeChange = '';
+  var isMax = false;
+</script>

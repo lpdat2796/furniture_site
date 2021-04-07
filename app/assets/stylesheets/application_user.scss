@@ -21,6 +21,12 @@
  @import "user/home";
  @import 'admin/fontawesome-free/css/all';
 
+ .product-category {
+   a {
+    color: #000 !important;
+   }
+ }
+
  .mt-5 {
    margin-top: 5px;
  }
@@ -50,8 +56,8 @@
 }
 
 .badge-warning {
-  color: #1f2d3d;
-  background-color: #ffc107;
+  color: #1f2d3d !important;
+  background-color: #ffc107 !important;
 }
 
 .mb-40 {

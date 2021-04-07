@@ -54,23 +54,6 @@ class User::OrdersController < User::BaseController
     @order = Order.where(id: params[:id]).where.not(status: 'draft').first
   end
 
-  def destroy
-    order_detail = OrderDetail.find(params[:id])
-    amount = order_detail.amount
-
-    if amount < 2
-      order_detail.order.update(total_amount: 0)
-      order_detail.destroy
-    else
-      order = order_detail.order
-      product = order_detail.product
-      order.update(total_amount: order.amount.to_i - product.price.to_i)
-      order_detail.update(amount: amount - 1)
-    end
-
-    redirect_to user_carts_path
-  end
-
   def checkout
     order = Order.find(params[:order_id])
     order.update(status: 'processing')
