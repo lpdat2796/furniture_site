@@ -51,7 +51,7 @@
             </div>
             <div class="product-content">
               <h4><a href="<%= user_product_path(id: product.id, category_id: @category&.id&.to_i) %>"><%= product.name %></a></h4>
-              <p class="price">$<%= product.price %></p>
+              <p class="price">$ <%= product.price %></p>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                       <div class="product-short-details">
                         <h2 class="product-title"><%= product.name %></h2>
-                        <p class="product-price">$<%= product.price %></p>
+                        <p class="product-price">$ <%= product.price %></p>
                         <p class="product-short-description">
                           <%= product.description %>
                         </p>

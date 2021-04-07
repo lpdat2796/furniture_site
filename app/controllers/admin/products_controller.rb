@@ -12,6 +12,14 @@ class Admin::ProductsController < Admin::BaseController
     @categories = Category.all
     @product = Product.new(params[:product].permit!)
 
+    if params[:product][:product_images_file_data].nil?
+      @categories = Category.all
+      flash.now[:danger] = 'Create product failed.'
+      @product.errors.add(:product_images_file_data, :blank)
+      render :new
+      return
+    end
+
     if @product.save
       params[:product][:product_images_file_data].each do |image|
         @product.product_images.create(file_data: image)

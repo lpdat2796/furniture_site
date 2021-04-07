@@ -14,19 +14,31 @@
       <%= form_for @user, url: admin_staff_path, method: :put do |f| %>
         <%= f.hidden_field :role, value: 'admin' %>
         <div class="card-body">
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Email</label>
-            <%= f.email_field :email, class: 'form-control' %>
+            <%= f.email_field :email, class: "form-control #{ 'is-invalid' if @user.errors.messages[:email].first.present? }" %>
+
+            <% if @user.errors.messages[:email].first.present? %>
+              <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:email].first %></p>
+            <% end %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Password</label>
-            <%= f.password_field :password, class: 'form-control' %>
+            <%= f.password_field :password, class: "form-control #{ 'is-invalid' if @user.errors.messages[:password].first.present? }" %>
+
+            <% if @user.errors.messages[:password].first.present? %>
+              <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:password].first %></p>
+            <% end %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Full name</label>
-            <%= f.text_field :full_name, class: 'form-control' %>
+            <%= f.text_field :full_name, class: "form-control #{ 'is-invalid' if @user.errors.messages[:full_name].first.present? }" %>
+
+            <% if @user.errors.messages[:full_name].first.present? %>
+              <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:full_name].first %></p>
+            <% end %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Gender</label>
             <div>
               <%= f.radio_button("gender", "male") %>

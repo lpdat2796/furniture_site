@@ -24,7 +24,7 @@
                           </div>
                         </td>
                         <td class='order-detail-amount-<%= order_detail.id %>'><%= order_detail.amount %></td>
-                        <td>$<%= order_detail.product.price %></td>
+                        <td>$ <%= order_detail.product.price %></td>
                       </tr>
                     <% end %>
                   </tbody>
@@ -32,7 +32,7 @@
                 <hr>
                 <div class="summary-total mb-40" style='text-align: right; font-weight: bold'>
                   <span>Total</span>
-                  <span class='checkout-total'>$<%= @order.total_amount %></span>
+                  <span class='checkout-total'>$ <%= @order.total_amount %></span>
                 </div>
               <% else %>
                 <h3 style='text-align: center;'>There is no item</h3>

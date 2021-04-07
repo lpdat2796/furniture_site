@@ -62,3 +62,9 @@
 .jv-image-60-60-3 {
   @include jv-image(60px, 60px, 3px);
 }
+
+.form-group.has-error {
+  .invalid-feedback {
+    display: block;
+  }
+}

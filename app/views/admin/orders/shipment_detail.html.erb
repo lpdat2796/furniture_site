@@ -14,23 +14,23 @@
       <%= form_for @order, url: shipment_detail_update_admin_orders_path, method: :post do |f| %>
         <%= hidden_field_tag :id, @order.id %>
         <div class="card-body">
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Order code</label>
             <%= text_field_tag :order_code, @order.uuid, class: 'form-control', readonly: true %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Email</label>
             <%= text_field_tag :email, @order.user.email, class: 'form-control', readonly: true %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Full name</label>
             <%= text_field_tag :email, @order.order_delivery.full_name, class: 'form-control', readonly: true %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Address</label>
             <%= text_field_tag :email, @order.order_delivery.address, class: 'form-control', readonly: true %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Phone</label>
             <%= text_field_tag :email, @order.order_delivery.phone, class: 'form-control', readonly: true %>
           </div>
@@ -63,13 +63,17 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Total amount</label>
             <%= text_field_tag :total_amount, "$ #{ @order.total_amount }", class: 'form-control', readonly: true %>
           </div>
-          <div class="form-group">
+          <div class="form-group has-error">
             <label>Shipment date</label>
-            <%= f.date_field :shipment_date, class: 'form-control' %>
+            <%= f.date_field :shipment_date, class: "form-control #{ 'is-invalid' if @order.errors.messages[:shipment_date].first.present? }" %>
+
+            <% if @order.errors.messages[:shipment_date].first.present? %>
+              <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @order.errors.messages[:shipment_date].first %></p>
+            <% end %>
           </div>
           <div style='text-align: right;'>
             <%= f.button 'Submit', type: 'submit', class: 'btn btn-primary', value: 'submit' %>
