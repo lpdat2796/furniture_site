@@ -86,6 +86,16 @@
       <i class="fas fa-chart-pie mr-1"></i>
       Sales
     </h3>
+    <div class="card-tools">
+      <ul class="nav nav-pills ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Revenue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sales-chart" data-toggle="tab">Order</a>
+        </li>
+      </ul>
+    </div>
   </div><!-- /.card-header -->
   <div class="card-body">
     <div class="tab-content p-0">
@@ -104,10 +114,10 @@
     var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
 
     var salesChartData = {
-      labels: ['January', 'February', 'March', 'April', 'May'],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
         {
-          label: 'Furniture',
+          label: 'Revenue',
           backgroundColor: 'rgba(60,141,188,0.9)',
           borderColor: 'rgba(60,141,188,0.8)',
           pointRadius: false,
@@ -115,18 +125,7 @@
           pointStrokeColor: 'rgba(60,141,188,1)',
           pointHighlightFill: '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data: [28, 48, 40, 19, 86, 27]
-        },
-        {
-          label: 'Decoration',
-          backgroundColor: 'rgba(210, 214, 222, 1)',
-          borderColor: 'rgba(210, 214, 222, 1)',
-          pointRadius: false,
-          pointColor: 'rgba(210, 214, 222, 1)',
-          pointStrokeColor: '#c1c7d1',
-          pointHighlightFill: '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data: [65, 59, 80, 81, 56, 55]
+          data: <%= @arr_total_amounts %>
         }
       ]
     }
@@ -155,6 +154,37 @@
       type: 'line',
       data: salesChartData,
       options: salesChartOptions
+    });
+
+    // Total order details for specific 3 main categories Chart
+    var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+    var pieData = {
+      labels: [
+        'Furniture',
+        "Baby's Furniture",
+        'Decorator'
+      ],
+      datasets: [
+        {
+          data: <%= @arr_amount_orders %>,
+          backgroundColor: ['#f56954', '#00a65a', '#f39c12']
+        }
+      ]
+    }
+    var pieOptions = {
+      legend: {
+        display: false
+      },
+      maintainAspectRatio: false,
+      responsive: true
+    }
+    // Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    // eslint-disable-next-line no-unused-vars
+    var pieChart = new Chart(pieChartCanvas, { // lgtm[js/unused-local-variable]
+      type: 'doughnut',
+      data: pieData,
+      options: pieOptions
     })
   })
 </script>

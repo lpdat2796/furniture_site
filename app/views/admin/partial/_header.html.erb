@@ -15,9 +15,6 @@
         <i class="far fa-user"></i> <%= current_admin.full_name %>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <%= link_to '#', class: 'dropdown-item' do %>
-          <i class="fas fa-lock mr-2"></i> Change profile
-        <% end %>
         <div class="dropdown-divider"></div>
         <%= link_to admin_logout_path, method: :delete, class: 'dropdown-item' do %>
           <i class="fas fa-sign-out-alt mr-2"></i> Logout
