@@ -57,9 +57,9 @@ class User::OrdersController < User::BaseController
   def checkout
     order = Order.find(params[:order_id])
     order.update(status: 'processing')
-    address = params[:address] || current_user.address
-    phone = params[:phone] || current_user.phone
-    full_name = params[:full_name] || current_user.full_name
+    address = params[:address].present? ? params[:address] : current_user.address
+    phone = params[:phone].present? ? params[:phone] : current_user.phone
+    full_name = params[:full_name].present? ? params[:full_name] : current_user.full_name
 
     OrderDelivery.create(address: address, phone: phone, full_name: full_name, order_id: params[:order_id])
     OrdersMailer.send_processing_mailer(current_user, order).deliver_now
