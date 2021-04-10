@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('.modal-login').on('click', function() {
-    var email = $('#user_email').val();;
-    var password = $('#user_password').val();;
+    var email = $('#email').val();
+    var password = $('#password').val();
 
     $.ajax({
       url: "/user/login_api/",

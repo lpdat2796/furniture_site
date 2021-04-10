@@ -490,7 +490,6 @@ COPY public.banners (id, name, image, is_public, sort_order, created_at, updated
 
 COPY public.categories (id, name, parent_id, created_at, updated_at, is_public, is_selected) FROM stdin;
 1	Furniture	0	2021-04-10 05:55:32.460653	2021-04-10 05:55:32.460653	t	t
-2	Baby furniture	0	2021-04-10 05:55:32.507491	2021-04-10 05:55:32.507491	t	t
 3	Decoration	0	2021-04-10 05:55:32.510485	2021-04-10 05:55:32.510485	t	t
 4	Living Room	0,1	2021-04-10 05:55:32.514446	2021-04-10 05:55:32.514446	t	f
 5	Dinning Room	0,1	2021-04-10 05:55:32.558316	2021-04-10 05:55:32.558316	t	f
@@ -546,6 +545,7 @@ COPY public.categories (id, name, parent_id, created_at, updated_at, is_public, 
 55	Trendy	0	2021-04-10 05:55:32.767807	2021-04-10 05:55:32.767807	t	f
 56	New furniture	0	2021-04-10 05:55:32.770186	2021-04-10 05:55:32.770186	t	f
 58	Office units	0,1,9	2021-04-10 05:58:18.12512	2021-04-10 05:58:18.12512	t	f
+2	Babies, Children & Teens	0	2021-04-10 05:55:32.507491	2021-04-10 05:55:32.507491	t	t
 \.
 
 
@@ -656,6 +656,8 @@ COPY public.category_products (id, category_id, product_id, created_at, updated_
 --
 
 COPY public.order_deliveries (id, order_id, address, full_name, phone, created_at, updated_at) FROM stdin;
+2	1	39 Nguyễn Thị Diệu P6 Q3	Lê Phước Đạt	0987654321	2021-04-10 04:54:23.567465	2021-04-10 04:54:23.567465
+3	2	39 Nguyễn Thị Diệu P6 Q3	Lê Phước Đạt	0987654321	2021-04-10 04:54:23.567465	2021-04-10 04:54:23.567465
 \.
 
 
@@ -664,6 +666,9 @@ COPY public.order_deliveries (id, order_id, address, full_name, phone, created_a
 --
 
 COPY public.order_details (id, order_id, product_id, amount, created_at, updated_at) FROM stdin;
+1	1	94	2	2021-04-10 04:54:23.568879	2021-04-10 12:53:47.702974
+2	2	95	1	2021-04-10 04:54:23.568879	2021-04-10 04:54:23.568879
+3	2	43	1	2021-04-10 04:54:23.568879	2021-04-10 04:54:23.568879
 \.
 
 
@@ -672,6 +677,8 @@ COPY public.order_details (id, order_id, product_id, amount, created_at, updated
 --
 
 COPY public.orders (id, user_id, status, total_amount, uuid, created_at, updated_at, reject_comment, expected_shipment_date, shipment_date, rejected_at, whodunit) FROM stdin;
+1	1	completed	105	872563	2021-03-10 13:07:44.053675	2021-04-10 13:07:44.088446	\N	2021-04-10	2021-04-10	\N	\N
+2	1	rejected	1500	253721	2021-04-10 04:54:23.570453	2021-04-10 14:53:32.09995	Out of stock	\N	\N	2021-04-10	2
 \.
 
 
@@ -810,6 +817,7 @@ COPY public.product_images (id, product_id, file_data, created_at, updated_at, s
 --
 
 COPY public.products (id, name, is_public, price, description, created_at, updated_at, dimension_x, dimension_y, dimension_z, amount, card_image, color, material) FROM stdin;
+43	ELLIOT - Double bed 180x200 - Washed antic	t	900	There's nothing better than a comfy bed for a good night's sleep! This double bed is fitted with a high headboard to properly rest against. Strength and beauty is guaranteed with a wood frame and reinforced legs. Offered in three sizes to fit your preference: 140cm, 160cm and 180 cm.\r\n\r\nBed comes disassembled so it can be conveniently shipped right to your door, and it comes with simple instructions to easily assemble with the help of a partner.\r\n	2021-04-10 08:40:07.698312	2021-04-10 14:53:32.117763	220	190	110	6	image.png	Washed antic	Acacia
 15	WIRE - Chair - Matt black and black leather	t	55	The WIRE metal dining chair is giving us all the coolest vibes. It features a geometric pattern on the backrest to elevate this design and make this dining chair anything but basic. Strong and sturdy, the metal frame will last through endless nights of gossiping with your squad over a few bia Saigon. And we added a seat cushion for you to get comfy. What more could you want?	2021-04-10 07:40:09.982203	2021-04-10 07:40:09.982203	44	57	75	11	image.png	Black, Matt black	Metal, Textile leather cushion
 18	JOHNSON - Chest of drawers L100xH85 - Matt black metal and washed antic	t	800	Style and storage all in one. Give your bedroom a stylish new upgrade while adding the convenient storage space that you need with this 6-drawer chest from the JOHNSON Collection. This industrial-inspired dresser features six spacious drawers that open and closes on smooth metal runners. These large drawers are ideal for stowing away a variety of different items like stacks of denim jeans and button-up shirts to cozy sweatpants and your collection of t-shirts. You can find a place for all your things!	2021-04-10 07:48:31.36871	2021-04-10 07:48:31.36871	100	45	85	2	image.png	Matt black, Washed antic	Acacia, Meta
 20	HELSINKI - Dressing table L115xH75 - Natural oak and white lacquer	t	300	Who hasn't dreamed of giving their bedroom that boudoir feel with a pretty dressing table? You'll be amazed by the HElSINKI Collection dressing table with its drawer! Ideal for a feminine and modern bedroom, this wooden dressing table reinvents the notion of modern furniture in the most subtle and refined of ways. Featuring an impressive round mirror on top, it also has a niche for subtly storing your jewellery or cosmetics tidily away.	2021-04-10 07:53:20.181246	2021-04-10 07:53:20.181246	115	48	75	2	image.png	Natural oak, White lacquer	Oak
@@ -850,7 +858,6 @@ COPY public.products (id, name, is_public, price, description, created_at, updat
 30	LISANDRO - Desk L120xW60 - Brocante white and washed antic	t	360	The LISANDRO Collection Desk is a chic and comfortable spot for productivity. It features clean lines in a sleek Mid-Century inspired design. Drawer fronts and legs feature a great and unique storage design. Two drawers provide ample room for a tablet, pens, paper and other home office essentials. What else do we need ?	2021-04-10 08:15:11.548611	2021-04-10 08:15:11.548611	120	60	75	8	image.png	Brocante white, Washed antic	Acacia
 34	STAR - Kids Table H50 - Pearl grey	t	120	Art projects, tea parties, and snack time are all the more fun with the STAR Kids Table and Chair Set. Stylishly simple,and featuring a sturdy wood construction, your kids will love to play on this table and chair set for years to come. For all parents who home school their children, we think you just found your new best friend! The ideal solution for kids’ playrooms, nursery rooms or even in the living room. Available in multiple color, the Ramona is both a fun piece for your children and a functional solution for you!	2021-04-10 08:23:30.80868	2021-04-10 08:23:30.80868	60	60	50	14	image.png	Pearl grey	Acacia
 38	TIPI - Single bed 100x200 - White and natural beech	t	380	It's a teepee, a tent and a bed all in one. Our Teepee Collection Bed combines all the comfiness of an actual kids bed with the playful adventure of a teepee. With a two-tone construction that highlights the wood's natural grain, it's the perfect blend of function and fun. The cutout side panels keep everything open and fun. He'll love it, you have our word on that!	2021-04-10 08:31:34.770482	2021-04-10 08:31:34.770482	226	115	177	6	image.png	Natural beech, White	Beech wood 
-43	ELLIOT - Double bed 180x200 - Washed antic	t	900	There's nothing better than a comfy bed for a good night's sleep! This double bed is fitted with a high headboard to properly rest against. Strength and beauty is guaranteed with a wood frame and reinforced legs. Offered in three sizes to fit your preference: 140cm, 160cm and 180 cm.\r\n\r\nBed comes disassembled so it can be conveniently shipped right to your door, and it comes with simple instructions to easily assemble with the help of a partner.\r\n	2021-04-10 08:40:07.698312	2021-04-10 08:40:07.698312	220	190	110	6	image.png	Washed antic	Acacia
 36	PEAR - Chest of drawer/Changing table L100 - White	t	350	Our PEAR 3-Drawer Dresser has made it easier than ever to create the right look right away for any room in your home. The stunning, white finish allows the dresser to coordinate with your other furniture and decor, while still standing out on its own. It features three spacious drawers, so it's as practical as it is stylish.	2021-04-10 08:27:21.165024	2021-04-10 08:27:21.165024	100	75	100	23	image__1_.png	White	Acacia
 39	JOHNSON - Single Bed 100x200 - Matt black metal and washed antic	t	350	Our JOHNSOON Bed might have a simple design, but that doesn't mean it lacks style. This elegant metal bed features an wood headboard with a low footboard. And it comes in one black striking finishes, so it will lend the perfect touch of style to any bedroom.	2021-04-10 08:32:55.858676	2021-04-10 08:32:55.858676	210	106	100	8	image.png	Matt black, Washed antic	Acacia, Metal 
 44	ALES - Twin Bed 120x200 - White	t	350	Designed with versatility and value in mind, this refreshingly simple white bed is defined by clean lines and effortless style. Its transitional design allows it to work well with decor that's contemporary, classic or eclectic. Plus, it can be accessorized with neutral bedding or more colorful designs. To put it simply, it makes furnishing kids rooms a real no-brainer. We love it, don't you ?	2021-04-10 08:41:25.493767	2021-04-10 08:41:25.493767	215	133	110	9	image.png	White	Acacia
@@ -874,12 +881,12 @@ COPY public.products (id, name, is_public, price, description, created_at, updat
 91	SEDAN - Petrol table clock H37 - Red and black	t	45	Featuring a distressed finish, this antiqued clock is an affordable alternative to restoring an old time-teller. A perfect accent piece in any ensemble, this tabletop clock offers a touch of old-world style with its broken-in look and rustic qualities. With large black numbers that are easy to read, this analog clock is both functional and decorative. It will fit nicely on your mantel, desk, or bookshelf.	2021-04-10 09:25:17.603763	2021-04-10 09:25:17.603763	2	11	37	25	image.png	Multicolor	Metal
 92	ZEI - Table mirror H30 - Gold and black marble	t	38	This table mirror is sleek and understated in design, giving you a beautifully crafted looking glass that you can use every day. Bordered by a thin, bevelled edge, this attractive mirror will is perfect for standing neatly atop your dressing table or desk to open up the room and help you get ready for the day ahead.	2021-04-10 09:27:19.573284	2021-04-10 09:27:19.573284	18	17	17	22	image.png	Black, Gold	Marble, Metal Colors: Black, Gold
 93	DIANE - Mirror with shelf L76xH89 - Patina mint	t	1200	Perfect to greet you in an entryway, placed above a mantle, or on any wall in your home this mirror will add just the right amount of character to your home. The attention to detail on the wooden frame will catch your eye at every glance.	2021-04-10 09:29:07.303713	2021-04-10 09:29:07.303713	76	13	89	8	image__2_.png	Patina mint	Acacia
-94	CHO - Printed canvas L57xH62 - Various designs, select the one you like	t	35		2021-04-10 09:31:13.027257	2021-04-10 09:31:13.027257	57	2	62	32	image.png	Multicolor	Fabric
-95	ETHNIC - Printed canvas with ethnics women L90xH95	t	600		2021-04-10 09:34:29.850511	2021-04-10 09:34:29.850511	90	2	95	8	image__5_.png	Multicolor	90Fabric
 96	LIFE - Memo board L40xH50 - Black metal	t	35	Keep your home clean and organised in a beautiful way with this memo board wall shelve. Contemporary mesh design adds style, efficiency and productivity to your desktop.	2021-04-10 09:37:14.018888	2021-04-10 09:37:14.018888	30	6	50	9	image.png	Black	Metal
 97	CUBE - Cube frame L67xH45 - Black metal	t	15	Keep your home stylish and modern montage metal frame. Contemporary metal design adds style, efficiency and productivity to your walls.\r\n\r\n	2021-04-10 09:38:18.966974	2021-04-10 09:38:18.966974	67	1	45	13	image.png	Black	Metal
 101	BRION - Stackable wine rack L46 - Black	t	35	If you like modern look, don't hesitate to introduce this metal stackable wine to your house! The funcationality and design of this wine rack will match almost any decor and look great on any wall in your home. Perfect to store a lot of wine bottles, also an awesome organization system when it comes to something bottled.	2021-04-10 09:45:06.365942	2021-04-10 09:45:06.365942	46	18	14	23	image.png	Black	Metal
 103	VICTOR - Glass carafe with spout H16	t	10		2021-04-10 09:48:20.917891	2021-04-10 09:48:20.917891	10	10	16	80	image.png	Transparent	Glass
+94	CHO - Printed canvas L57xH62 - Various designs, select the one you like	t	35		2021-04-10 09:31:13.027257	2021-04-10 12:53:47.717791	57	2	62	30	image.png	Multicolor	Fabric
+95	ETHNIC - Printed canvas with ethnics women L90xH95	t	600		2021-04-10 09:34:29.850511	2021-04-10 14:53:32.112339	90	2	95	8	image__5_.png	Multicolor	90Fabric
 \.
 
 
@@ -929,8 +936,18 @@ COPY public.schema_migrations (version) FROM stdin;
 --
 
 COPY public.users (id, email, password, full_name, address, phone, age, role, created_at, updated_at, gender, password_digest) FROM stdin;
-1	datlp2796@gmail.com	\N	Lê Phước Đạt	39 Nguyễn Thị Diệu P6 Q3	0987654321	25	0	2021-04-10 04:55:43.502314	2021-04-10 04:55:43.502314	\N	$2a$12$Y031oK28W1RkgpwwhO.T7Oidu9F7YEr5ljyHxp7hE61qG7dG2ZdB2
-2	admin@example.com	\N	Admin	\N	\N	\N	\N	2021-04-10 04:56:13.207189	2021-04-10 04:56:13.207189	\N	$2a$12$TkVOgqJ3GiKP3HfoyzTak./33jF09qiq9vPox0MfiUpQ6sIWbTMuW
+1	datlp2796@gmail.com	\N	Lê Phước Đạt	39 Nguyễn Thị Diệu P6 Q3	0987654321	25	0	2021-04-10 04:55:43.502314	2021-04-10 12:58:35.900315	male	$2a$12$eAPVdfedfawnt5N6CQVmNe8hoYhq2Q6Qm3xExoxVjDWtm1UbvsRuO
+2	admin@example.com	\N	Admin	\N	\N	\N	1	2021-04-10 04:56:13.207189	2021-04-10 14:51:25.940666	\N	$2a$12$TkVOgqJ3GiKP3HfoyzTak./33jF09qiq9vPox0MfiUpQ6sIWbTMuW
+3	larraine_wehner@runte.org	\N	Leonard Goodwin	58729 Karma Mountain, Hilpertside, OH 25453	0958596745	21	0	2021-04-10 15:01:28.377668	2021-04-10 15:01:28.377668	\N	$2a$12$5k8Qe.TEXJAUfj7fTri8y.vqjI5cZJpOQqFG2giRYuYiUw5gJKFrm
+4	marya@beier-hyatt.info	\N	Steven Rice III	Suite 868 791 Aleen Centers, Morganhaven, MA 46704	0678558569	35	0	2021-04-10 15:01:28.611724	2021-04-10 15:01:28.611724	\N	$2a$12$F4rDZIszaN3Gh4CY6jtHzOHifUMLBvzXhai9jGb0NF.ByXik3s4WC
+5	freddie.waters@reichel.org	\N	Genna Stokes	Suite 639 2188 Albina Cliffs, Burmaborough, OR 66606	0984841967	55	0	2021-04-10 15:01:28.840557	2021-04-10 15:01:28.840557	\N	$2a$12$qRFeu1PbOR/r8v5pDGfSfOBYDnJFKrlOjpyRQ/Fadr.1.xLtKGJEy
+6	carleen@johnson.io	\N	Jude Little	3512 DuBuque Pine, Langoshville, AR 69843	0999723145	47	0	2021-04-10 15:01:29.115209	2021-04-10 15:01:29.115209	\N	$2a$12$eqYADm1Pz9JyLnBS443.yeut4tRposFXhofmyPuye8l0NDHrcsX6S
+7	cassey.buckridge@nikolaus.biz	\N	Tyrone Vandervort	673 Effertz Spur, Port Michal, AK 06309-8236	0600319744	24	0	2021-04-10 15:01:29.400781	2021-04-10 15:01:29.400781	\N	$2a$12$mXvmtcYxq4AXNNC9JbXdAOUh6gJKsykA1lgctnWkrAbnnguQt8i46
+8	aldo.durgan@hilll-mccullough.name	\N	Mercedes Torp	80307 Jenkins Fork, New Erynfort, NE 52320	0275394339	34	0	2021-04-10 15:01:29.669048	2021-04-10 15:01:29.669048	\N	$2a$12$QSTORELeMFtFC4SZd.s4cepzBTWL932Lc9591njfDia3hWA0B5KKm
+9	gilda_abbott@muller.co	\N	Darrin Lang IV	9553 Zemlak Trafficway, Feilmouth, MT 11062	0782806293	32	0	2021-04-10 15:01:29.899718	2021-04-10 15:01:29.899718	\N	$2a$12$VZh2sRCIgLiBAFblI5QSpOF5UZeDUbjubmftav95b1cPo.QCgl.Cy
+10	jolyn@hintz-schultz.co	\N	Macie Leannon	Suite 627 24531 Kaylee Hills, West Marquettashire, MA 78583-8828	0088087066	21	0	2021-04-10 15:01:30.17293	2021-04-10 15:01:30.17293	\N	$2a$12$ULotDKui3z6sM88KRfx.0eh8Qz2miwQM8feYlkVkoWE7A38Yx/3Qi
+11	rodrick.reilly@stanton-schroeder.com	\N	Hayden Berge	42755 Brakus Wells, Wisokybury, MA 55842	0925344412	47	0	2021-04-10 15:01:30.401043	2021-04-10 15:01:30.401043	\N	$2a$12$a7P/x4AKQLkSNxzs55AIIe/D6SKOn2dWCND2.MZ.SoXuCLM1Wvm6O
+12	euna@schumm-brown.biz	\N	Sheena Price	679 Gwyn Gardens, Kulasside, GA 46269-7281	0157344970	43	0	2021-04-10 15:01:30.629854	2021-04-10 15:01:30.629854	\N	$2a$12$RuUx1t5EuQELIgt0C/gbEebHWy7IHPNec/RD1yD07mrHMWDHCoiku
 \.
 
 
@@ -959,21 +976,21 @@ SELECT pg_catalog.setval('public.category_products_id_seq', 136, true);
 -- Name: order_deliveries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
 --
 
-SELECT pg_catalog.setval('public.order_deliveries_id_seq', 1, false);
+SELECT pg_catalog.setval('public.order_deliveries_id_seq', 3, true);
 
 
 --
 -- Name: order_details_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
 --
 
-SELECT pg_catalog.setval('public.order_details_id_seq', 1, false);
+SELECT pg_catalog.setval('public.order_details_id_seq', 3, true);
 
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
 --
 
-SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+SELECT pg_catalog.setval('public.orders_id_seq', 2, true);
 
 
 --
@@ -994,7 +1011,7 @@ SELECT pg_catalog.setval('public.products_id_seq', 103, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pat
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_id_seq', 12, true);
 
 
 --

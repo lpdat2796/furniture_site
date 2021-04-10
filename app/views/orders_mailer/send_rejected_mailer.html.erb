@@ -9,7 +9,6 @@
         <tr>
           <td>
             <h1>Dear <%= @user.full_name %>.</h1>
-
             <p>
               Your order <%= @order.uuid %> is rejected because '<%= @order.reject_comment %>'. We sorry for this inconvenience. 
               Please visit <%= link_to 'AVIATO', user_root_url %> to continue shopping. Thank you very much!
@@ -24,9 +23,9 @@
     <table border="0" cellpadding="0" cellspacing="0" style="width:100%" class='cke_show_border'>
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Amount</th>
+          <th style='text-align: left;'>Product</th>
+          <th style='text-align: left;'>Price</th>
+          <th style='text-align: left;'>Amount</th>
         </tr>
       </thead>
       <tbody>

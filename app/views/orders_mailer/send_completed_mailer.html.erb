@@ -15,7 +15,7 @@
               VIATO hope you are satisfied with these products. Please visit my <%= link_to 'AVITO', user_root_url %> to continue shopping. Thank you very much!
             </p>
 
-            <h3>ORDER INFORMATION <%= @order.uuid %><span style="color:rgb(119, 119, 119); font-size:12px">(<%= @order.created_at.to_date %>)</span></h3>
+            <h3>ORDER INFORMATION <%= @order.uuid %>&nbsp;<span style="color:rgb(119, 119, 119); font-size:12px">(<%= @order.created_at.to_date %>)</span></h3>
           </td>
         </tr>
         <tr>
@@ -48,9 +48,9 @@
     <table border="0" cellpadding="0" cellspacing="0" style="width:100%" class='cke_show_border'>
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Amount</th>
+          <th style='text-align: left;'>Product</th>
+          <th style='text-align: left;'>Price</th>
+          <th style='text-align: left;'>Amount</th>
         </tr>
       </thead>
       <tbody>

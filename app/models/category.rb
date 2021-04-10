@@ -3,9 +3,6 @@ class Category < ApplicationRecord
   has_many :category_products
   has_many :products, through: :category_products
 
-  # Validations
-  validates :name, presence: true, uniqueness: true
-
   # Callbacks
   before_save :set_parent_id
 
