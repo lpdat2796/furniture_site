@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   def index
-    @users = User.where(role: 'user').page(params[:page]).per(25)
+    @users = User.where(role: 'user').order(id: :asc).page(params[:page]).per(25)
   end
 
   def new

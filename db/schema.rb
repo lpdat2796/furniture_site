@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210407134819) do
+ActiveRecord::Schema.define(version: 20210410095554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,9 @@ ActiveRecord::Schema.define(version: 20210407134819) do
     t.string "name"
     t.string "image"
     t.boolean "is_public", default: false
-    t.string "url"
     t.integer "sort_order", default: 0
-    t.datetime "created_at", default: "2021-04-04 05:27:21", null: false
-    t.datetime "updated_at", default: "2021-04-04 05:27:21", null: false
+    t.datetime "created_at", default: "2021-04-10 04:54:23", null: false
+    t.datetime "updated_at", default: "2021-04-10 04:54:23", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -31,6 +30,7 @@ ActiveRecord::Schema.define(version: 20210407134819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_public", default: false
+    t.boolean "is_selected", default: false
   end
 
   create_table "category_products", force: :cascade do |t|
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20210407134819) do
     t.string "address"
     t.string "full_name"
     t.string "phone"
-    t.datetime "created_at", default: "2021-04-04 05:27:21", null: false
-    t.datetime "updated_at", default: "2021-04-04 05:27:21", null: false
+    t.datetime "created_at", default: "2021-04-10 04:54:23", null: false
+    t.datetime "updated_at", default: "2021-04-10 04:54:23", null: false
     t.index ["order_id"], name: "index_order_deliveries_on_order_id"
   end
 
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 20210407134819) do
     t.bigint "order_id"
     t.bigint "product_id"
     t.integer "amount", default: 1
-    t.datetime "created_at", default: "2021-04-04 05:27:21", null: false
-    t.datetime "updated_at", default: "2021-04-04 05:27:21", null: false
+    t.datetime "created_at", default: "2021-04-10 04:54:23", null: false
+    t.datetime "updated_at", default: "2021-04-10 04:54:23", null: false
     t.index ["order_id"], name: "index_order_details_on_order_id"
     t.index ["product_id"], name: "index_order_details_on_product_id"
   end
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 20210407134819) do
     t.string "status"
     t.string "total_amount"
     t.string "uuid"
-    t.datetime "created_at", default: "2021-04-04 05:27:21", null: false
-    t.datetime "updated_at", default: "2021-04-04 05:27:21", null: false
+    t.datetime "created_at", default: "2021-04-10 04:54:23", null: false
+    t.datetime "updated_at", default: "2021-04-10 04:54:23", null: false
     t.string "reject_comment"
     t.date "expected_shipment_date"
     t.date "shipment_date"

@@ -25,7 +25,7 @@
             <label>Parent category</label>
             <%= f.select(:parent_id, options_for_select(category_options_array(@categories)), { include_blank: "&nbsp;".html_safe }, class: 'form-control') %>
           </div>
-          <div class="form-group has-error">
+          <div class="form-group">
             <label>Public</label>
             <div>
               <%= f.radio_button("is_public", "true") %>
@@ -34,6 +34,17 @@
             <div>
               <%= f.radio_button("is_public", "false", checked: true) %>
               <%= label :is_public, 'False' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Select</label>
+            <div>
+              <%= f.radio_button("is_selected", "true") %>
+              <%= label :is_selected, 'True' %>
+            </div>
+            <div>
+              <%= f.radio_button("is_selected", "false", checked: true) %>
+              <%= label :is_selected, 'False' %>
             </div>
           </div>
         <!-- /.card-body -->

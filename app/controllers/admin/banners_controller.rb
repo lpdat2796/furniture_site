@@ -1,6 +1,6 @@
 class Admin::BannersController < Admin::BaseController
   def index
-    @banners = Banner.page(params[:page]).per(25)
+    @banners = Banner.order(id: :asc).page(params[:page]).per(25)
   end
 
   def new

@@ -92,3 +92,10 @@
   font-size: 80%;
   color: #dc3545;
 }
+
+.product-short-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+}

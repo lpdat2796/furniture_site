@@ -5,7 +5,7 @@ class User::CartsController < User::BaseController
       return
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
+    @parent_categories = Category.where(parent_id: 0, is_public: true, is_selected: true)
     @order = current_user.orders.find_by(status: 'draft')
     @order_details = @order&.order_details || []
   end
@@ -16,7 +16,7 @@ class User::CartsController < User::BaseController
       return
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
+    @parent_categories = Category.where(parent_id: 0, is_public: true, is_selected: true)
     @order = current_user.orders.find_by(status: 'draft')
     @order_details = @order&.order_details || []
   end

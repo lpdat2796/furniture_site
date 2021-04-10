@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::BaseController
   def index
-    @orders = Order.where(status: 'processing').page(params[:page]).per(25)
+    @orders = Order.where(status: 'processing').order(id: :asc).page(params[:page]).per(25)
   end
 
   def edit
@@ -34,7 +34,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def rejected_orders
-    @orders = Order.where(status: 'rejected')
+    @orders = Order.where(status: 'rejected').order(id: :asc).page(params[:page]).per(25)
   end
 
   def rejected_order_detail
@@ -42,7 +42,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def shipments
-    @orders = Order.where(status: 'delivery')
+    @orders = Order.where(status: 'delivery').order(id: :asc).page(params[:page]).per(25)
   end
 
   def shipment_detail
@@ -63,7 +63,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def completed_orders
-    @orders = Order.where(status: 'completed')
+    @orders = Order.where(status: 'completed').order(id: :asc).page(params[:page]).per(25)
   end
 
   def completed_order_detail

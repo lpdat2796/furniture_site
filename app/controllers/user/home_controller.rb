@@ -7,7 +7,7 @@ class User::HomeController < User::BaseController
       @user = User.new
     end
 
-    @parent_categories = Category.where(name: ['Furniture', 'Baby furniture', 'Decoration'], parent_id: 0, is_public: true)
+    @parent_categories = Category.where(parent_id: 0, is_public: true, is_selected: true)
     @new_category = Category.where(name: 'New furniture', parent_id: 0).first
     @new_products = @new_category.products.where(is_public: true).limit(6)
     @trendy_category = Category.where(name: 'Trendy', parent_id: 0).first

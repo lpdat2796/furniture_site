@@ -5,5 +5,4 @@ class Banner < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :image, presence: true
-  validates :url, presence: true
 end

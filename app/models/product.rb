@@ -7,7 +7,6 @@ class Product < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :price, presence: true
-  validates :description, presence: true
   validates :dimension_x, presence: true
   validates :dimension_y, presence: true
   validates :dimension_z, presence: true

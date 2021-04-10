@@ -148,7 +148,7 @@
 														<%= product.description %>
 													</p>
 													<% if current_user.present? %>
-														<a href="javascript:addItem(<%= product.id %>);"><i class="tf-ion-android-cart"></i></a>
+														<a href="javascript:addItem(<%= product.id %>);" class="btn btn-main">Add To Cart</a>
 													<% else %>
 														<span data-toggle="modal" data-target="#login-modal" class='btn btn-main'>
 															Add To Cart
