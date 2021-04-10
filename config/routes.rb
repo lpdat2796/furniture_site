@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :products
     get "/login", to: "sessions#new"
     post '/login', to: "sessions#create"
+    post '/login_api', to: "sessions#create_api"
     delete "/logout", to: "sessions#destroy"
     get "/sign_up", to: "registrations#new"
     post '/sign_up', to: "registrations#create"

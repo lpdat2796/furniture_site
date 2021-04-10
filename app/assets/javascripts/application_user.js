@@ -23,3 +23,4 @@
 //= require user/script
 //= require user/orders
 //= require user/custom
+//= require user/authentication

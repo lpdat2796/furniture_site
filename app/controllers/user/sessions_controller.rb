@@ -10,8 +10,18 @@ class User::SessionsController < User::BaseController
       session[:user_id] = @user.id
       redirect_to user_root_path
     else
-      flash[:danger] = 'Login failed.'
+      flash[:danger] = 'Invalid email or password.'
       redirect_to user_login_path
+    end
+  end
+
+  def create_api
+    @user = User.find_by(email: params[:email]) 
+    if @user && @user.authenticate(params[:password]) && @user.user?
+      session[:user_id] = @user.id
+      render json: { login: true }
+    else
+      render json: { login: false }
     end
   end
 

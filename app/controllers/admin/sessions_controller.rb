@@ -12,7 +12,7 @@ class Admin::SessionsController < Admin::BaseController
       session[:admin_id] = @user.id
       redirect_to admin_root_path
     else
-      flash[:danger] = 'Login failed.'
+      flash[:danger] = 'Invalid email or password.'
       redirect_to admin_login_path
     end
   end

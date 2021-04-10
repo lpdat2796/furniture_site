@@ -9,23 +9,47 @@
           <h2 class="text-center">Create Your Account</h2>
           <%= form_for @user, url: user_sign_up_path, html: { class: 'text-left clearfix', method: :post } do |f| %>
             <%= f.hidden_field :role, value: 'user' %>
-            <div class="form-group has-error">
-              <%= f.text_field :full_name, class: 'form-control', placeholder: 'Full name' %>
+            <div class="form-group <%= 'has-error' if @user.errors.messages[:full_name].first.present? %>">
+              <%= f.text_field :full_name, placeholder: 'Full name', class: "form-control #{ 'is-invalid' if @user.errors.messages[:full_name].first.present? }" %>
+
+              <% if @user.errors.messages[:full_name].first.present? %>
+                <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:full_name].first %></p>
+              <% end %>
             </div>
-            <div class="form-group has-error">
-              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+            <div class="form-group <%= 'has-error' if @user.errors.messages[:email].first.present? %>">
+              <%= f.email_field :email, placeholder: 'Email', class: "form-control #{ 'is-invalid' if @user.errors.messages[:email].first.present? }" %>
+
+              <% if @user.errors.messages[:email].first.present? %>
+                <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:email].first %></p>
+              <% end %>
             </div>
-            <div class="form-group has-error">
-              <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+            <div class="form-group <%= 'has-error' if @user.errors.messages[:password].first.present? %>">
+              <%= f.password_field :password, placeholder: 'Password', class: "form-control #{ 'is-invalid' if @user.errors.messages[:password].first.present? }" %>
+
+              <% if @user.errors.messages[:password].first.present? %>
+                <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:password].first %></p>
+              <% end %>
             </div>
-            <div class="form-group has-error">
-              <%= f.text_field :address, class: 'form-control', placeholder: 'Address' %>
+            <div class="form-group <%= 'has-error' if @user.errors.messages[:address].first.present? %>">
+              <%= f.text_field :address, placeholder: 'Address', class: "form-control #{ 'is-invalid' if @user.errors.messages[:address].first.present? }" %>
+
+              <% if @user.errors.messages[:address].first.present? %>
+                <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:address].first %></p>
+              <% end %>
             </div>
-            <div class="form-group has-error">
-              <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone' %>
+            <div class="form-group <%= 'has-error' if @user.errors.messages[:phone].first.present? %>">
+              <%= f.text_field :phone, placeholder: 'Phone', class: "form-control #{ 'is-invalid' if @user.errors.messages[:phone].first.present? }" %>
+
+              <% if @user.errors.messages[:phone].first.present? %>
+                <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:phone].first %></p>
+              <% end %>
             </div>
-            <div class="form-group has-error">
-              <%= f.text_field :age, class: 'form-control', placeholder: 'Age' %>
+            <div class="form-group <%= 'has-error' if @user.errors.messages[:age].first.present? %>">
+              <%= f.text_field :age, placeholder: 'Age', class: "form-control #{ 'is-invalid' if @user.errors.messages[:age].first.present? }" %>
+
+              <% if @user.errors.messages[:age].first.present? %>
+                <p class="invalid-feedback"><i class="fa fa-warning"></i> <%= @user.errors.messages[:age].first %></p>
+              <% end %>
             </div>
             <div>
               <%= f.radio_button("gender", "male", checked: true) %>
@@ -44,7 +68,6 @@
             </div>
           <% end %>
           <p class="mt-20">Already hava an account ?<a href="<%= user_login_path %>"> Login</a></p>
-          <p><a href="forget-password.html"> Forgot your password?</a></p>
         </div>
       </div>
     </div>
